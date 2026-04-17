@@ -1,6 +1,6 @@
 # QCSA
 
-The homepage for the Quantum Computing Student Association — connecting quantum computing students and researchers across California universities.
+The homepage for the Quantum Computing Science Association — connecting quantum computing students and researchers across California universities.
 
 Built with [Next.js](https://nextjs.org), Tailwind CSS v4, and [Geist](https://vercel.com/font).
 
