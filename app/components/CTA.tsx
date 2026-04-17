@@ -9,8 +9,8 @@ export default function CTA() {
           Join the Quantum Revolution
         </h2>
         <p className="text-gray-500 text-base leading-relaxed mb-8">
-          Whether you're a student, researcher, or quantum enthusiast,
-          there's a place for you in QCSA
+          Whether you&apos;re a student, researcher, or quantum enthusiast,
+          there&apos;s a place for you in QCSA
         </p>
         <Button href="/coming-soon" size="lg" className="bg-blue-900">
           Learn More
