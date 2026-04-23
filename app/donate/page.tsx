@@ -1,11 +1,6 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 export default function DonatePage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <Navbar />
-      <main className="flex-1 flex flex-col items-center py-20 px-4">
+    <div className="flex flex-col items-center py-20 px-4">
         <div className="w-full max-w-2xl">
           <div className="text-center mb-16">
             <h1 className="text-2xl font-semibold text-gray-900 mb-3">Donate Today!</h1>
@@ -92,8 +87,6 @@ export default function DonatePage() {
             </div>
           </form>
         </div>
-      </main>
-      <Footer />
     </div>
   );
 }
