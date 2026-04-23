@@ -28,7 +28,7 @@ export default function Navbar() {
         >
           Gallery
         </Link>
-        <Button href="/coming-soon" size="sm" className="font-semibold rounded-md bg-blue-900">
+        <Button href="/donate" size="sm" className="font-semibold rounded-md bg-blue-900">
           Donate
         </Button>
       </div>
