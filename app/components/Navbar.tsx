@@ -4,25 +4,25 @@ import { Button } from "./ui/button";
 export default function Navbar() {
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-[#eaf0fc] border-b border-blue-100">
-      <div className="relative h-10 w-19 overflow-hidden">
+      <a href="/" className="relative h-10 w-19 overflow-hidden block">
         <Image
           src="/QCSA-Logo-2.webp"
-          alt="QCSA Logo"
+          alt="QCSA Logo — go to home"
           fill
           priority
           sizes="48px"
           className="object-contain scale-200"
         />
-      </div>
+      </a>
       <div className="flex items-center gap-6">
         <a
-          href="#about"
+          href="/about-us"
           className="text-sm font-semibold text-blue-900 hover:text-gray-900 transition-colors"
         >
           About Us
         </a>
         <a
-          href="#gallery"
+          href="/gallery"
           className="text-sm font-semibold text-blue-900 hover:text-gray-900 transition-colors"
         >
           Gallery

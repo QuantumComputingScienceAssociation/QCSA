@@ -11,6 +11,7 @@ type Branch = {
   subtext: string;
   image: StaticImageData;
   imageClassName?: string;
+  href?: string;
 };
 
 const branches: Branch[] = [
@@ -19,6 +20,7 @@ const branches: Branch[] = [
     subtext: "Pioneering quantum research and education at UCLA",
     image: ucla,
     imageClassName: "object-cover object-[center_33%]",
+    href: "https://qcsa-ucla.org",
   },
   {
     name: "Caltech",
@@ -39,6 +41,7 @@ const branches: Branch[] = [
     name: "QDC",
     subtext: "Quantum Device Community",
     image: qdc,
+    href: "https://qdc-qcsa.org",
   },
 ];
 
@@ -55,33 +58,49 @@ export default function Branches() {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {branches.map((branch) => (
-            <div
-              key={branch.name}
-              className="relative rounded-2xl overflow-hidden aspect-4/3 cursor-pointer group shadow-sm bg-gray-900"
-            >
-              <Image
-                src={branch.image}
-                alt={`${branch.name} campus`}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className={branch.imageClassName ?? "object-cover"}
-                placeholder="blur"
-              />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-              <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-md">
-                <ArrowUpRight size={16} stroke="white" strokeWidth={2.5} />
+          {branches.map((branch) => {
+            const inner = (
+              <>
+                <Image
+                  src={branch.image}
+                  alt={`${branch.name} campus`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className={branch.imageClassName ?? "object-cover"}
+                  placeholder="blur"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+                <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-md">
+                  <ArrowUpRight size={16} stroke="white" strokeWidth={2.5} />
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 z-10">
+                  <span className="block text-white text-base font-semibold tracking-wide">
+                    {branch.name}
+                  </span>
+                  <span className="block text-white/80 text-xs mt-0.5">
+                    {branch.subtext}
+                  </span>
+                </div>
+              </>
+            );
+            const sharedClass =
+              "relative rounded-2xl overflow-hidden aspect-4/3 cursor-pointer group shadow-sm bg-gray-900";
+            return branch.href ? (
+              <a
+                key={branch.name}
+                href={branch.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={sharedClass}
+              >
+                {inner}
+              </a>
+            ) : (
+              <div key={branch.name} className={sharedClass}>
+                {inner}
               </div>
-              <div className="absolute bottom-4 left-4 right-4 z-10">
-                <span className="block text-white text-base font-semibold tracking-wide">
-                  {branch.name}
-                </span>
-                <span className="block text-white/80 text-xs mt-0.5">
-                  {branch.subtext}
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

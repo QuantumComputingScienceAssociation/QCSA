@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QCSA — Quantum Computing Student Association",
+  title: "QCSA: Quantum Computing Science Association",
   description: "Empowering the Future of Quantum Computing across California universities.",
 };
 
