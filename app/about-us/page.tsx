@@ -20,6 +20,8 @@ interface FacultyMember {
   id: number;
   name: string;
   role: string;
+  affiliation?: string;
+  branches: string[];
   bio: string;
   image: string;
   linkedIn: string;
@@ -183,16 +185,51 @@ const facultyLeadership: FacultyMember[] = [
     id: 1,
     name: "Professor Mark Gyure",
     role: "Faculty Director",
+    affiliation: "UCLA",
+    branches: ['UCLA'],
     bio: "In addition to coordinating the day-to-day activities of the CQSE, Gyure's research is focused on the theory and simulation of solid-state quantum information processing devices and architectures, specifically electrostatically-defined semiconductor quantum dots. He and collaborators at UCLA and HRL Laboratories, LLC in Malibu have developed a sophisticated device modeling code that employs the full configuration-interaction (FCI) method to solve the multi-electron Schrodinger equation self consistently with the electrostatic potential generated from realistic device geometries, enabling highly accurate calculations of the energy spectrum of coupled quantum dot systems. He came to UCLA recently from HRL Laboratories where he was the Principal Investigator and Chief Scientist for over 15 years on numerous programs in the quantum information science and technology area.",
     image: "/mark.png",
     linkedIn: "https://www.linkedin.com/in/mark-gyure-15b186196/",
   },
+  {
+    id: 2,
+    name: "Eli Levenson-Falk",
+    role: "Advisor",
+    affiliation: "University of Southern California",
+    branches: ['UCLA', 'QDC'],
+    bio: "Eli Levenson-Falk is an Associate Professor at USC specializing in quantum device fabrication, materials science, and noise in superconducting quantum systems. His group studies the microscopic origins of decoherence and develops new approaches to building long-lived qubits.",
+    image: "/ELILF.jpeg",
+    linkedIn: "",
+  },
+  {
+    id: 3,
+    name: "Murat Can Sarihan",
+    role: "Advisor",
+    affiliation: "Google Quantum AI",
+    branches: ['UCLA', 'QDC'],
+    bio: "Murat Can Sarihan is a Research Scientist at Google Quantum AI focusing on superconducting qubit design and quantum error correction. His research contributes to Google's efforts to build large-scale, error-corrected quantum processors.",
+    image: "/Murat_Can_Sarihan.jpeg",
+    linkedIn: "",
+  },
+  {
+    id: 4,
+    name: "Zlatko Minev",
+    role: "Advisor",
+    affiliation: "Google Quantum AI",
+    branches: ['UCLA', 'QDC'],
+    bio: "Zlatko Minev is a Research Scientist at Google Quantum AI, known for his landmark work on catching and reversing quantum jumps. He also created Qiskit Metal, an open-source quantum hardware design tool. His research spans quantum measurement, qubit design automation, and machine learning for quantum systems.",
+    image: "/ZMinev.jpeg",
+    linkedIn: "",
+  },
 ];
+
+const teamBranches = ['UCLA', 'Caltech', 'USC', 'UCSD', 'UCSB', 'QDC'];
 
 export default function AboutPage() {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | FacultyMember | null>(null);
+  const [selectedBranch, setSelectedBranch] = useState('UCLA');
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -283,7 +320,7 @@ export default function AboutPage() {
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.h2
-              className="text-4xl md:text-5xl font-bold text-[#234285] text-center mb-16"
+              className="text-4xl md:text-5xl font-bold text-[#234285] text-center mb-10"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -291,78 +328,112 @@ export default function AboutPage() {
             >
               Meet the Team
             </motion.h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {boardMembers.map((member, index) => (
-                <motion.div
-                  key={member.id}
-                  className={`relative group cursor-pointer ${hoveredMember === member.id ? 'z-50' : 'z-0'}`}
-                  onMouseEnter={() => !isMobile && setHoveredMember(member.id)}
-                  onMouseLeave={() => !isMobile && setHoveredMember(null)}
-                  onClick={() => handleMemberClick(member)}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
-                  whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
-                    <div className="w-full h-64 bg-gray-200 flex items-center justify-center overflow-hidden relative">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        width={256}
-                        height={256}
-                        className="w-full h-full object-cover"
-                      />
-                      {isMobile && (
-                        <button
-                          className="absolute top-2 right-2 w-8 h-8 bg-[#234285] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg hover:bg-blue-700 transition-colors z-10"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (member.linkedIn) window.open(member.linkedIn, '_blank', 'noopener,noreferrer');
-                          }}
-                          aria-label={`View ${member.name}'s LinkedIn profile`}
-                        >
-                          in
-                        </button>
-                      )}
-                    </div>
-                    <div className="p-5 text-center">
-                      <h3 className="font-bold text-lg text-gray-800 mb-1">{member.name}</h3>
-                      <p className="text-[#234285] font-medium text-sm mb-1">{member.role}</p>
-                      <p className="text-gray-500 text-xs">{member.major}, {member.year}</p>
-                    </div>
-                  </div>
 
-                  {/* Desktop hover popup */}
-                  {!isMobile && hoveredMember === member.id && (
-                    <div className="absolute z-50 top-0 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 transform -translate-x-2 -translate-y-2 max-h-80 overflow-y-auto">
-                      <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
-                          <Image
-                            src={member.image}
-                            alt={member.name}
-                            width={56}
-                            height={56}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-base text-gray-800 mb-0.5">{member.name}</h3>
-                          <p className="text-[#234285] font-medium text-sm mb-1">{member.role}</p>
-                          <p className="text-gray-500 text-xs mb-3">{member.major}, {member.year}</p>
-                          <p className="text-gray-600 text-xs leading-relaxed">{member.bio}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
+            {/* Branch tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              {teamBranches.map((branch) => (
+                <button
+                  key={branch}
+                  onClick={() => setSelectedBranch(branch)}
+                  className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-200 ${
+                    selectedBranch === branch
+                      ? 'bg-[#234285] text-white'
+                      : 'bg-white text-[#234285] border border-[#234285]/30 hover:bg-[#234285]/10'
+                  }`}
+                >
+                  {branch}
+                </button>
               ))}
             </div>
+
+            {selectedBranch === 'UCLA' ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {boardMembers.map((member, index) => (
+                  <motion.div
+                    key={member.id}
+                    className={`relative group cursor-pointer ${hoveredMember === member.id ? 'z-50' : 'z-0'}`}
+                    onMouseEnter={() => !isMobile && setHoveredMember(member.id)}
+                    onMouseLeave={() => !isMobile && setHoveredMember(null)}
+                    onClick={() => handleMemberClick(member)}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05, duration: 0.5 }}
+                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  >
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
+                      <div className="w-full h-64 bg-gray-200 flex items-center justify-center overflow-hidden relative">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                        {isMobile && (
+                          <button
+                            className="absolute top-2 right-2 w-8 h-8 bg-[#234285] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg hover:bg-blue-700 transition-colors z-10"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (member.linkedIn) window.open(member.linkedIn, '_blank', 'noopener,noreferrer');
+                            }}
+                            aria-label={`View ${member.name}'s LinkedIn profile`}
+                          >
+                            in
+                          </button>
+                        )}
+                      </div>
+                      <div className="p-5 text-center">
+                        <h3 className="font-bold text-lg text-gray-800 mb-1">{member.name}</h3>
+                        <p className="text-[#234285] font-medium text-sm mb-1">{member.role}</p>
+                        <p className="text-gray-500 text-xs">{member.major}, {member.year}</p>
+                      </div>
+                    </div>
+
+                    {/* Desktop hover popup */}
+                    {!isMobile && hoveredMember === member.id && (
+                      <div className="absolute z-50 top-0 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 transform -translate-x-2 -translate-y-2 max-h-80 overflow-y-auto">
+                        <div className="flex items-start gap-4">
+                          <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                            <Image
+                              src={member.image}
+                              alt={member.name}
+                              fill
+                              className="rounded-full object-cover"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-base text-gray-800 mb-0.5">{member.name}</h3>
+                            <p className="text-[#234285] font-medium text-sm mb-1">{member.role}</p>
+                            <p className="text-gray-500 text-xs mb-3">{member.major}, {member.year}</p>
+                            <p className="text-gray-600 text-xs leading-relaxed">{member.bio}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <motion.div
+                key={selectedBranch}
+                className="flex flex-col items-center justify-center py-20 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="relative w-56 h-56 mb-6">
+                  <Image src="/quantum_aura.png" alt="" fill className="object-contain opacity-40" />
+                </div>
+                <h3 className="text-2xl font-bold text-[#234285] mb-3">Coming Soon</h3>
+                <p className="text-[#234285]/60 max-w-sm leading-relaxed">
+                  Leadership profiles for our {selectedBranch} chapter will be added here soon.
+                </p>
+              </motion.div>
+            )}
           </div>
         </section>
 
-        {/* Faculty Leadership */}
+        {(selectedBranch === 'UCLA' || selectedBranch === 'QDC') && (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <motion.h2
@@ -374,8 +445,8 @@ export default function AboutPage() {
             >
               Faculty Leadership
             </motion.h2>
-            <div className="flex justify-center">
-              {facultyLeadership.map((faculty, index) => (
+            <div className="flex flex-wrap justify-center gap-8">
+              {facultyLeadership.filter((f) => f.branches.includes(selectedBranch)).map((faculty, index) => (
                 <motion.div
                   key={faculty.id}
                   className={`relative group cursor-pointer w-full max-w-xs ${hoveredMember === faculty.id + 1000 ? 'z-50' : 'z-0'}`}
@@ -393,9 +464,8 @@ export default function AboutPage() {
                       <Image
                         src={faculty.image}
                         alt={faculty.name}
-                        width={256}
-                        height={256}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                       {isMobile && (
                         <button
@@ -413,6 +483,7 @@ export default function AboutPage() {
                     <div className="p-5 text-center">
                       <h3 className="font-bold text-lg text-gray-800 mb-1">{faculty.name}</h3>
                       <p className="text-[#234285] font-medium text-sm">{faculty.role}</p>
+                      {faculty.affiliation && <p className="text-gray-500 text-xs mt-0.5">{faculty.affiliation}</p>}
                     </div>
                   </div>
 
@@ -420,18 +491,18 @@ export default function AboutPage() {
                   {!isMobile && hoveredMember === faculty.id + 1000 && (
                     <div className="absolute z-50 top-0 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 transform -translate-x-2 -translate-y-2 max-h-80 overflow-y-auto">
                       <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
                           <Image
                             src={faculty.image}
                             alt={faculty.name}
-                            width={56}
-                            height={56}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="rounded-full object-cover"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-base text-gray-800 mb-0.5">{faculty.name}</h3>
-                          <p className="text-[#234285] font-medium text-sm mb-3">{faculty.role}</p>
+                          <p className="text-[#234285] font-medium text-sm mb-0.5">{faculty.role}</p>
+                          {faculty.affiliation && <p className="text-gray-500 text-xs mb-3">{faculty.affiliation}</p>}
                           <p className="text-gray-600 text-xs leading-relaxed">{faculty.bio}</p>
                         </div>
                       </div>
@@ -442,6 +513,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        )}
 
         {/* Mobile Bio Modal */}
         {isMobile && selectedMember && (
@@ -465,13 +537,12 @@ export default function AboutPage() {
             >
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-start gap-4 flex-1">
-                  <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
                     <Image
                       src={selectedMember.image}
                       alt={selectedMember.name}
-                      width={56}
-                      height={56}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="rounded-full object-cover"
                     />
                   </div>
                   <div className="flex-1">

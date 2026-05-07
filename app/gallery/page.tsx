@@ -8,38 +8,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface GalleryItem {
   src: string;
   alt: string;
-  category: string;
+  branch: string;
 }
 
 const photos: GalleryItem[] = [
-  { src: '/gallery1.png', alt: 'QCSA Event', category: 'Events' },
-  { src: '/gallery2.png', alt: 'QCSA Event', category: 'Events' },
-  { src: '/gallery3.png', alt: 'QCSA Event', category: 'Events' },
-  { src: '/gallery4.png', alt: 'QCSA Event', category: 'Events' },
-//   { src: '/gallery5.png', alt: 'QCSA Event', category: 'Events' },
-  { src: '/qcsa_acm_workshop.png', alt: 'ACM Quantum Workshop', category: 'Workshops' },
-  { src: '/iquhack.png', alt: 'iQuHACK Hackathon', category: 'Hackathons' },
-  { src: '/QHack_Graphic.png', alt: 'QHack', category: 'Hackathons' },
-  { src: '/yquantum.png', alt: 'yQuantum', category: 'Hackathons' },
-  { src: '/qube_poster.png', alt: 'Qube Poster', category: 'Posters' },
-  { src: '/QuantumClasses_Graphic.png', alt: 'Quantum Classes', category: 'Workshops' },
-  { src: '/QCSA_Flyer_Dolev_Bluvstein.jpg', alt: 'Dolev Bluvstein Talk', category: 'Talks' },
-  { src: '/qcf-flyer-final.png', alt: 'QCF Flyer', category: 'Events' },
-  { src: '/join-us.png', alt: 'Join QCSA', category: 'Posters' },
-  { src: '/Newsletter_Graphic.png', alt: 'QCSA Newsletter', category: 'Posters' },
-  { src: '/ucla_caltech.png', alt: 'UCLA x Caltech', category: 'Events' },
-  { src: '/ucla_usc.png', alt: 'UCLA x USC', category: 'Events' },
-  { src: '/ucla_acm.png', alt: 'UCLA x ACM', category: 'Workshops' },
+  { src: '/gallery1.png', alt: 'QCSA UCLA Event', branch: 'UCLA' },
+  { src: '/gallery2.png', alt: 'QCSA UCLA Event', branch: 'UCLA' },
+  { src: '/gallery3.png', alt: 'QCSA UCLA Event', branch: 'UCLA' },
+  { src: '/gallery4.png', alt: 'QCSA UCLA Event', branch: 'UCLA' },
+  { src: '/qcsa_acm_workshop.png', alt: 'ACM Quantum Workshop', branch: 'UCLA' },
+  { src: '/iquhack.png', alt: 'iQuHACK Hackathon', branch: 'UCLA' },
+  { src: '/QHack_Graphic.png', alt: 'QHack', branch: 'UCLA' },
+  { src: '/yquantum.png', alt: 'yQuantum', branch: 'UCLA' },
+  { src: '/qube_poster.png', alt: 'Qube Poster', branch: 'UCLA' },
+  { src: '/QuantumClasses_Graphic.png', alt: 'Quantum Classes', branch: 'UCLA' },
+  { src: '/QCSA_Flyer_Dolev_Bluvstein.jpg', alt: 'Dolev Bluvstein Talk', branch: 'UCLA' },
+  { src: '/qcf-flyer-final.png', alt: 'QCF Flyer', branch: 'UCLA' },
+  { src: '/join-us.png', alt: 'Join QCSA', branch: 'UCLA' },
+  { src: '/Newsletter_Graphic.png', alt: 'QCSA Newsletter', branch: 'UCLA' },
+  { src: '/ucla_acm.png', alt: 'UCLA x ACM', branch: 'UCLA' },
+  { src: '/ucla_caltech.png', alt: 'UCLA x Caltech Collaboration', branch: 'Caltech' },
+  { src: '/ucla_usc.png', alt: 'UCLA x USC Collaboration', branch: 'USC' },
+  { src: '/qdw2026Poster.png', alt: 'QDW 2026', branch: 'QDC' },
 ];
 
-const categories = ['All', ...Array.from(new Set(photos.map((p) => p.category)))];
+const branches = ['All', 'UCLA', 'Caltech', 'USC', 'UCSD', 'UCSB', 'QDC'];
 
 export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeBranch, setActiveBranch] = useState('All');
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
   const filtered =
-    activeCategory === 'All' ? photos : photos.filter((p) => p.category === activeCategory);
+    activeBranch === 'All' ? photos : photos.filter((p) => p.branch === activeBranch);
 
   return (
     <div className="min-h-screen bg-[#F3F8FF]">
@@ -56,62 +56,80 @@ export default function GalleryPage() {
           >
             <h1 className="text-4xl md:text-5xl font-bold text-[#234285] mb-4">Gallery</h1>
             <p className="text-[#234285]/70 text-lg max-w-xl mx-auto">
-              A look at QCSA events, workshops, hackathons, and more.
+              A look at QCSA events, workshops, hackathons, and more across our branches.
             </p>
           </motion.div>
 
-          {/* Filter tabs */}
+          {/* Branch tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {categories.map((cat) => (
+            {branches.map((branch) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={branch}
+                onClick={() => setActiveBranch(branch)}
                 className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-200 ${
-                  activeCategory === cat
+                  activeBranch === branch
                     ? 'bg-[#234285] text-white'
                     : 'bg-white text-[#234285] border border-[#234285]/30 hover:bg-[#234285]/10'
                 }`}
               >
-                {cat}
+                {branch}
               </button>
             ))}
           </div>
 
-          {/* Grid */}
-          <motion.div
-            layout
-            className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
-          >
-            <AnimatePresence>
-              {filtered.map((photo, index) => (
-                <motion.div
-                  key={photo.src}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3, delay: index * 0.03 }}
-                  className="break-inside-avoid cursor-pointer rounded-2xl overflow-hidden shadow-md group relative"
-                  onClick={() => setLightbox(photo)}
-                >
-                  <div className="relative w-full">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      width={600}
-                      height={400}
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm font-semibold p-4">
-                        {photo.alt}
-                      </span>
+          {/* Grid or empty state */}
+          {filtered.length === 0 ? (
+            <motion.div
+              key={activeBranch}
+              className="flex flex-col items-center justify-center py-24 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="relative w-48 h-48 mb-6">
+                <Image src="/quantum_atom.png" alt="" fill className="object-contain opacity-30" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#234285] mb-2">Coming Soon</h3>
+              <p className="text-[#234285]/60 max-w-sm">
+                Photos from our {activeBranch} branch will be added here soon. Stay tuned!
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              layout
+              className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
+            >
+              <AnimatePresence>
+                {filtered.map((photo, index) => (
+                  <motion.div
+                    key={photo.src}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3, delay: index * 0.03 }}
+                    className="break-inside-avoid cursor-pointer rounded-2xl overflow-hidden shadow-md group relative"
+                    onClick={() => setLightbox(photo)}
+                  >
+                    <div className="relative w-full">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm font-semibold p-4">
+                          {photo.alt}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          )}
         </div>
       </main>
 
