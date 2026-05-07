@@ -33,7 +33,7 @@ const boardMembers: TeamMember[] = [
     major: "Electrical Engineering",
     year: "2nd Year",
     bio: "Victor is a second year at UCLA studying Electrical Engineering with a minor in Mathematics. He works in the Petta Group to model the effects of cosmic rays on semiconductor spin qubits and to perform automated tune-up of quantum dot systems. He enjoys teaching others about quantum science, such as through QCSA's involvement in ACM Quantum. In his free time, he enjoys playing the piano, reading fantasy & science fiction, eating good food, and calisthenics.",
-    image: "/Victor%20Yu.png",
+    image: "/Victoryu.png",
     linkedIn: "https://www.linkedin.com/in/victoryu0/",
   },
   {
@@ -43,7 +43,7 @@ const boardMembers: TeamMember[] = [
     major: "EECS",
     year: "PhD Student",
     bio: "Alex is an EECS PhD student at the Narang Lab. He completed his BSc in Physics and MSc in Quantum Engineering at ETH Zürich in Switzerland and worked at IBM and the German Aerospace Center before joining UCLA in 2024. In his research, Alexander focuses on Quantum Algorithms and Learning Theory as well as optimization techniques and Machine Learning. On the rare occasion that he quantum tunnels outside the office he enjoys water sports, Brazilian Jiu Jitsu and all things Italian in nature.",
-    image: "/alexander%20Jurgens.png",
+    image: "/AlexanderJurgens.png",
     linkedIn: "https://www.linkedin.com/in/alexander-jurgens/",
   },
   {
@@ -63,7 +63,7 @@ const boardMembers: TeamMember[] = [
     major: "Electrical Engineering",
     year: "PhD Student",
     bio: "Nicolas received a Bachelor of Science in Electrical Engineering at ETH Zurich, Switzerland in 2022 and a Master of Science in Physics at the University of California, Los Angeles in 2023. He is currently pursuing a PhD in Electrical Engineering in the NarangLab. Currently, his main research focus is on quantum sensing and quantum networks. He also has research interests in quantum error correction and quantum computation. Feel free to reach out if you want to go surfing!",
-    image: "/Nicolas%20Dirnegger.png",
+    image: "/NicolasDirnegger.png",
     linkedIn: "https://www.linkedin.com/in/nicolas-dirnegger-aa8442100/",
   },
   {
@@ -73,7 +73,7 @@ const boardMembers: TeamMember[] = [
     major: "EE & Physics",
     year: "PhD Student",
     bio: "Cody received a double Bachelor of Science in Electrical Engineering and Physics from UCLA and a Masters of Science in Electrical Engineering from UCLA with a Distinguished Masters Thesis Award. He is currently pursuing a PhD at the Mesoscopic Optics and Quantum Electronics Lab as an NSF Graduate Research Fellow. Currently, his main research focus is on superconducting bosonic qubits and silicon color centers. Before starting graduate school, he interned at Stanford Research Institute as a Quantum Machine Learning Intern. In his free time, he enjoys producing music, cooking, fashion, and raving.",
-    image: "/Cody%20Fan.png",
+    image: "/CodyFan.png",
     linkedIn: "https://www.linkedin.com/in/cody-fan-09717a167/",
   },
   {
