@@ -1,8 +1,16 @@
-# QCSA — Quantum Computing Science Association
+<div align="center">
 
-The official website for the **Quantum Computing Science Association (QCSA)** — a multi-university nonprofit connecting quantum computing students, researchers, and industry professionals across California.
+# QCSA
+### Quantum Computing Science Association
 
-**Live site:** [QCSA](https://qcsa.org)
+*Connecting quantum computing students, researchers, and industry professionals across California.*
+
+[![Live Site](https://img.shields.io/badge/Live%20Site-qcsa--ucla.org-234285?style=for-the-badge&logo=globe&logoColor=white)](https://qcsa-ucla.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Deployed on Cloudflare](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Pages-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
+
+</div>
 
 ---
 
