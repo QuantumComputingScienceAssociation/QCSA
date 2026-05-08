@@ -1,14 +1,96 @@
-# QCSA
+# QCSA — Quantum Computing Science Association
 
-The homepage for the Quantum Computing Science Association — connecting quantum computing students and researchers across California universities.
+The official website for the **Quantum Computing Science Association (QCSA)** — a multi-university nonprofit connecting quantum computing students, researchers, and industry professionals across California.
 
-Built with [Next.js](https://nextjs.org), Tailwind CSS v4, and [Geist](https://vercel.com/font).
+**Live site:** [QCSA](https://qcsa.org)
 
-## Development
+---
+
+## About
+
+QCSA brings together chapters at UCLA, Caltech, USC, UCSD, and UCSB, as well as the **Quantum Device Community (QDC)**. The organization runs workshops, hackathons, research talks, and collaborative events to make quantum computing accessible and exciting for students at every level.
+
+---
+
+## Pages
+
+| Route | Description |
+|---|---|
+| `/` | Homepage — Hero, Mission, Branch cards, QDW 2026 banner, CTA |
+| `/about-us` | Team page — branch tabs, board member cards with hover bios, faculty advisors |
+| `/gallery` | Photo gallery — branch-filtered masonry grid with lightbox |
+| `/coming-soon` | Placeholder for the Donate page |
+
+---
+
+## Tech Stack
+
+| Technology | Version | Usage |
+|---|---|---|
+| [Next.js](https://nextjs.org) | 16.2.3 | App Router, SSR/SSG |
+| [React](https://react.dev) | 19.2.4 | UI components |
+| [Tailwind CSS](https://tailwindcss.com) | v4 | Styling |
+| [framer-motion](https://www.framer.com/motion/) | ^12 | Animations & transitions |
+| [lucide-react](https://lucide.dev) | ^1.8 | Icons |
+| TypeScript | ^5 | Type safety |
+
+---
+
+## Project Structure
+
+```
+app/
+├── page.tsx                  # Homepage
+├── layout.tsx                # Root layout (Navbar not included here)
+├── globals.css               # Global styles
+├── about-us/
+│   └── page.tsx              # Team & advisors page
+├── gallery/
+│   └── page.tsx              # Photo gallery
+├── coming-soon/
+│   └── page.tsx              # Donate placeholder
+└── components/
+    ├── Navbar.tsx            # Site-wide navigation (logo → home)
+    ├── Hero.tsx              # Homepage hero section
+    ├── Mission.tsx           # Mission statement section
+    ├── Branches.tsx          # Branch cards (UCLA, QDC linked)
+    ├── CTA.tsx               # Call-to-action section
+    ├── Footer.tsx            # Site footer
+    ├── QDWBanner.tsx         # QDW 2026 event advertisement banner
+    └── ui/
+        └── button.tsx        # Shared Button component
+public/                       # Static assets (images, logos, posters)
+```
+
+---
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
+
+```bash
+npm run build   # Production build
+npm run start   # Run production build locally
+npm run lint    # Lint with ESLint
+```
+
+---
+
+## Deployment
+
+The site is deployed on **Cloudflare Pages**. Next.js image optimization is disabled (`images: { unoptimized: true }` in `next.config.ts`) for Cloudflare compatibility.
+
+---
+
+## Branch Links
+
+| Branch | Website |
+|---|---|
+| UCLA | [qcsa-ucla.org](https://qcsa-ucla.org) |
+| QDC | [qdc-qcsa.org](https://qdc-qcsa.org) |
+| Caltech, USC, UCSD, UCSB | Coming soon |
