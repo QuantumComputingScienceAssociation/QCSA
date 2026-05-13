@@ -184,7 +184,7 @@ const facultyLeadership: FacultyMember[] = [
   {
     id: 1,
     name: "Professor Mark Gyure",
-    role: "Faculty Director",
+    role: "Senior Director",
     affiliation: "UCLA",
     branches: ['UCLA'],
     bio: "In addition to coordinating the day-to-day activities of the CQSE, Gyure's research is focused on the theory and simulation of solid-state quantum information processing devices and architectures, specifically electrostatically-defined semiconductor quantum dots. He and collaborators at UCLA and HRL Laboratories, LLC in Malibu have developed a sophisticated device modeling code that employs the full configuration-interaction (FCI) method to solve the multi-electron Schrodinger equation self consistently with the electrostatic potential generated from realistic device geometries, enabling highly accurate calculations of the energy spectrum of coupled quantum dot systems. He came to UCLA recently from HRL Laboratories where he was the Principal Investigator and Chief Scientist for over 15 years on numerous programs in the quantum information science and technology area.",
@@ -194,7 +194,7 @@ const facultyLeadership: FacultyMember[] = [
   {
     id: 2,
     name: "Eli Levenson-Falk",
-    role: "Advisor",
+    role: "Senior Director",
     affiliation: "University of Southern California",
     branches: ['UCLA', 'QDC'],
     bio: "Eli Levenson-Falk is an Associate Professor at USC specializing in quantum device fabrication, materials science, and noise in superconducting quantum systems. His group studies the microscopic origins of decoherence and develops new approaches to building long-lived qubits.",
@@ -204,7 +204,7 @@ const facultyLeadership: FacultyMember[] = [
   {
     id: 3,
     name: "Murat Can Sarihan",
-    role: "Advisor",
+    role: "Senior Director",
     affiliation: "Google Quantum AI",
     branches: ['UCLA', 'QDC'],
     bio: "Murat Can Sarihan is a Research Scientist at Google Quantum AI focusing on superconducting qubit design and quantum error correction. His research contributes to Google's efforts to build large-scale, error-corrected quantum processors.",
@@ -214,7 +214,7 @@ const facultyLeadership: FacultyMember[] = [
   {
     id: 4,
     name: "Zlatko Minev",
-    role: "Advisor",
+    role: "Senior Director",
     affiliation: "Google Quantum AI",
     branches: ['UCLA', 'QDC'],
     bio: "Zlatko Minev is a Research Scientist at Google Quantum AI, known for his landmark work on catching and reversing quantum jumps. He also created Qiskit Metal, an open-source quantum hardware design tool. His research spans quantum measurement, qubit design automation, and machine learning for quantum systems.",
@@ -443,7 +443,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              Faculty Leadership
+              Senior Leadership
             </motion.h2>
             <div className="flex flex-wrap justify-center gap-8">
               {facultyLeadership.filter((f) => f.branches.includes(selectedBranch)).map((faculty, index) => (
