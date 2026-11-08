@@ -15,18 +15,71 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
           </a>
           <header className="mb-10 mt-6 border-b border-[#234285]/15 pb-6">
             <h1 className="text-3xl font-bold text-[#234285] sm:text-4xl">{post.title}</h1>
+            {post.articleTitle && (
+              <h2 className="mt-5 text-2xl font-semibold leading-snug text-[#234285] sm:text-3xl">
+                {post.articleTitle}
+              </h2>
+            )}
+            {post.articleByline && (
+              <p className="mt-4 text-base leading-relaxed">{post.articleByline}</p>
+            )}
+            {(post.articleAuthor || post.articleDate) && (
+              <p className="mt-2 text-sm text-[#234285]/65">
+                {[post.articleAuthor, post.articleDate].filter(Boolean).join(" · ")}
+              </p>
+            )}
           </header>
           <div className="space-y-6 text-[#234285]/80">
-            {post.content?.map((block, index) => block.type === "paragraph" ? (
-              <p key={index}>{block.text}</p>
-            ) : (
-              <details key={index} className="ml-4 sm:ml-6">
-                <summary className="cursor-pointer text-[#234285] marker:text-[#234285]/60">
-                  {block.summary}
-                </summary>
-                <p className="mt-4 leading-relaxed">{block.body}</p>
-              </details>
-            ))}
+            {post.introductionHeading && (
+              <section aria-labelledby="blog-introduction">
+                <h2 id="blog-introduction" className="mb-4 text-2xl font-bold text-[#234285]">
+                  {post.introductionHeading}
+                </h2>
+              </section>
+            )}
+            {post.content?.map((block, index) => {
+              if (block.type === "paragraph") return <p key={index}>{block.text}</p>;
+              if (block.type === "caption") {
+                return <p key={index} className="text-sm leading-relaxed text-[#234285]/65">{block.text}</p>;
+              }
+              if (block.type === "heading") {
+                return block.level === 3 ? (
+                  <h3 key={index} className="pt-2 text-xl font-semibold text-[#234285]">{block.text}</h3>
+                ) : (
+                  <h2 key={index} className="pt-6 text-2xl font-bold text-[#234285]">{block.text}</h2>
+                );
+              }
+              return (
+                <details key={index} className="ml-4 sm:ml-6">
+                  <summary className="cursor-pointer text-[#234285] marker:text-[#234285]/60">
+                    {block.summary}
+                  </summary>
+                  <p className="mt-4 leading-relaxed">{block.body}</p>
+                </details>
+              );
+            })}
+            {post.methodologyOverview && (
+              <section aria-labelledby="methodology-overview" className="space-y-4 pt-6">
+                <h2 id="methodology-overview" className="text-2xl font-bold text-[#234285]">
+                  Methodology Overview
+                </h2>
+                <Image
+                  src={post.methodologyOverview.src}
+                  alt={post.methodologyOverview.alt}
+                  width={1600}
+                  height={1120}
+                  className="h-auto w-full"
+                />
+              </section>
+            )}
+            {post.resultsHeading && (
+              <section aria-labelledby="blog-results" className="pt-6">
+                <h2 id="blog-results" className="text-2xl font-bold text-[#234285]">
+                  {post.resultsHeading}
+                </h2>
+                {post.resultsContent && <p className="mt-4">{post.resultsContent}</p>}
+              </section>
+            )}
             {/* Figures are configured in blogs.ts. */}
             {post.figures.map((figure) => (
               <figure key={figure.src} className="space-y-2">
