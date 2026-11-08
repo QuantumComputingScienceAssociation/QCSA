@@ -35,7 +35,7 @@ QCSA brings together chapters at UCLA, Caltech, USC, UCSD, and UCSB, as well as 
 
 | Technology | Version | Usage |
 |---|---|---|
-| [Next.js](https://nextjs.org) | 16.2.3 | App Router, SSR/SSG |
+| [Next.js](https://nextjs.org) | 16.2.3 | App Router, static generation |
 | [React](https://react.dev) | 19.2.4 | UI components |
 | [Tailwind CSS](https://tailwindcss.com) | v4 | Styling |
 | [framer-motion](https://www.framer.com/motion/) | ^12 | Animations & transitions |
@@ -82,8 +82,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
-npm run build   # Production build
-npm run start   # Run production build locally
+npm run build   # Generate the static site in out/
 npm run lint    # Lint with ESLint
 ```
 
@@ -91,7 +90,14 @@ npm run lint    # Lint with ESLint
 
 ## Deployment
 
-The site is deployed on **Cloudflare Pages**. Next.js image optimization is disabled (`images: { unoptimized: true }` in `next.config.ts`) for Cloudflare compatibility.
+The site is deployed as a static export on **Cloudflare Pages**. In the Pages project's build settings, select **Next.js (Static HTML Export)** or set:
+
+- **Build command:** `npm run build`
+- **Build output directory:** `out`
+
+Replace any existing `npx @cloudflare/next-on-pages@1` build command; the adapter is deprecated and is not needed for this static site. Push the changes and trigger a new deployment after updating the settings.
+
+The export is configured in `next.config.ts`, with Next.js image optimization disabled for static hosting. Run `npm run dev` for local development; to preview a production build, serve the `out` directory with a static file server. `next start` is not supported for static exports. Server-only Next.js features are not available, and new dynamic routes must be generated at build time.
 
 ---
 
