@@ -14,5 +14,7 @@ Drop each headshot in this folder using the matching name and one of these exten
 | Anthony Mitine | `anthony-mitine` |
 | A R Bathri Narayanan | `a-r-bathri-narayanan` |
 | Aashay Pandharpatte | `aashay-pandharpatte` |
+| Nachiket Joshi | `nachiket-joshi` |
+| Perawit Boonsomchua | `perawit-boonsomchua` |
 
 For example: `sanskriti-shindadkar.jpg`. The page detects the available image automatically. Short bios can be added to `app/research/team.ts`.

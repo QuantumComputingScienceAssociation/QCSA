@@ -18,4 +18,6 @@ export const researchTeam: ResearchTeamMember[] = [
   { name: "Anthony Mitine", role: "Researcher", blurb: "", headshot: "anthony-mitine" },
   { name: "A R Bathri Narayanan", role: "Researcher", blurb: "", headshot: "a-r-bathri-narayanan" },
   { name: "Aashay Pandharpatte", role: "Researcher", blurb: "", headshot: "aashay-pandharpatte" },
+  { name: "Nachiket Joshi", role: "Researcher", blurb: "", headshot: "nachiket-joshi" },
+  { name: "Perawit Boonsomchua", role: "Researcher", blurb: "", headshot: "perawit-boonsomchua" },
 ];

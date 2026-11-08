@@ -18,8 +18,8 @@ export default function ResearchPage() {
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-[#234285]/70">
               If you are interested in joining or recruiting PhD students, masters students, and undergrads for your own research projects, please email{" "}
-              <a className="font-semibold text-[#234285] underline underline-offset-4 hover:text-blue-700" href="mailto:research@qcsa.org">
-                research@qcsa.org
+              <a className="font-semibold text-[#234285] underline underline-offset-4 hover:text-blue-700" href="mailto:sanskriti-s@berkeley.edu">
+                sanskriti-s@berkeley.edu
               </a>.
             </p>
           </header>
