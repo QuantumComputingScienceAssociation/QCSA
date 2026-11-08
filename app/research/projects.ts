@@ -15,8 +15,7 @@ export const researchProjects: ResearchProject[] = [
     image: "/research/amino-acid.png",
     imageAlt: "Amino acid molecular model",
     paperLabel: "arXiv",
-    // Replace with the project paper URL when it is finalized.
-    paperUrl: "https://arxiv.org/search/?query=VQE+benchmarking&searchtype=all",
+    paperUrl: "https://arxiv.org/abs/2607.02620",
     blogSlug: "vqe-benchmarking",
   },
   {
@@ -25,8 +24,7 @@ export const researchProjects: ResearchProject[] = [
     image: "/research/protein-ligand.png",
     imageAlt: "Protein with a ligand in its binding pocket",
     paperLabel: "OpenReview",
-    // Replace with the project submission URL when it is finalized.
-    paperUrl: "https://openreview.net/search?term=Classical-Quantum%20CNNs%20Protein-Ligand%20Binding%20Affinity",
+    paperUrl: "https://openreview.net/pdf?id=vmma8SnJh6",
     blogSlug: "protein-ligand-binding-affinity",
   },
 ];

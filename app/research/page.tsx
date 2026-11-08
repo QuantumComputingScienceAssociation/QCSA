@@ -53,10 +53,10 @@ export default function ResearchPage() {
             <h2 id="research-team" className="mb-6 text-2xl font-bold text-[#234285]">
               Research Team
             </h2>
-            <div className="divide-y divide-[#234285]/20 border-y border-[#234285]/20">
+            <div className="grid gap-x-12 gap-y-8 border-y border-[#234285]/20 py-6 sm:grid-cols-2 sm:gap-y-10">
               {researchTeam.map((member) => {
                 return (
-                  <article key={member.name} className="flex items-center gap-5 py-5 sm:gap-6 sm:py-6">
+                  <article key={member.name} className="flex items-center gap-5 py-3 sm:gap-6">
                     <TeamHeadshot name={member.name} stem={member.headshot} />
                     <div>
                       <h3 className="text-lg font-bold text-[#234285]">{member.name}</h3>
