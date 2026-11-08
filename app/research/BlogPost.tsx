@@ -14,13 +14,20 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
             ← Research projects
           </a>
           <header className="mb-10 mt-6 border-b border-[#234285]/15 pb-6">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#234285]/60">
-              Research blog · {post.project}
-            </p>
             <h1 className="text-3xl font-bold text-[#234285] sm:text-4xl">{post.title}</h1>
           </header>
           <div className="space-y-6 text-[#234285]/80">
-            {/* Add post sections here. Figures are configured in blogs.ts. */}
+            {post.content?.map((block, index) => block.type === "paragraph" ? (
+              <p key={index}>{block.text}</p>
+            ) : (
+              <details key={index} className="ml-4 sm:ml-6">
+                <summary className="cursor-pointer text-[#234285] marker:text-[#234285]/60">
+                  {block.summary}
+                </summary>
+                <p className="mt-4 leading-relaxed">{block.body}</p>
+              </details>
+            ))}
+            {/* Figures are configured in blogs.ts. */}
             {post.figures.map((figure) => (
               <figure key={figure.src} className="space-y-2">
                 <Image

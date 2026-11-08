@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { researchProjects } from "./projects";
-import { researchTeam } from "./team";
+import { previousResearchTeam, researchTeam } from "./team";
 import TeamHeadshot from "./TeamHeadshot";
 
 export default function ResearchPage() {
@@ -66,6 +66,25 @@ export default function ResearchPage() {
                   </article>
                 );
               })}
+            </div>
+          </section>
+          <section aria-labelledby="previous-members" className="mt-14">
+            <h2 id="previous-members" className="mb-6 text-2xl font-bold text-[#234285]">
+              Previous Members
+            </h2>
+            <div className="grid gap-x-12 gap-y-8 border-y border-[#234285]/20 py-6 sm:grid-cols-2 sm:gap-y-10">
+              {previousResearchTeam.length ? previousResearchTeam.map((member) => (
+                <article key={member.name} className="flex items-center gap-5 py-3 sm:gap-6">
+                  <TeamHeadshot name={member.name} stem={member.headshot} />
+                  <div>
+                    <h3 className="text-lg font-bold text-[#234285]">{member.name}</h3>
+                    <p className="mt-1 text-[#234285]/70">{member.role}</p>
+                    {member.blurb && <p className="mt-2 max-w-3xl text-[#234285]/70">{member.blurb}</p>}
+                  </div>
+                </article>
+              )) : (
+                <p className="col-span-full text-[#234285]/70">Previous members will be listed here.</p>
+              )}
             </div>
           </section>
         </div>
