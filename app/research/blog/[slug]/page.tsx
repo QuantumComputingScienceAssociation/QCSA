@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import BlogPost from "../../BlogPost";
-import { researchBlogs } from "../../blogs";
+import { researchBlogs } from "../../blog-data";
 
 export function generateStaticParams() {
   return Object.keys(researchBlogs).map((slug) => ({ slug }));

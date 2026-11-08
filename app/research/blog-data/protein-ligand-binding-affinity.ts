@@ -1,62 +1,6 @@
-export interface ResearchBlog {
-  title: string;
-  project: string;
-  content?: (
-    | { type: "paragraph"; text: string }
-    | { type: "expandable"; summary: string; body: string }
-    | { type: "heading"; text: string; level?: 2 | 3 }
-    | { type: "caption"; text: string }
-  )[];
-  articleTitle?: string;
-  articleByline?: string;
-  articleAuthor?: string;
-  articleDate?: string;
-  introductionHeading?: string;
-  methodologyOverview?: { src: string; alt: string };
-  resultsHeading?: string;
-  resultsContent?: string;
-  /** Add image paths here as the post grows, for example: ["/research/vqe/ansatz.png"]. */
-  figures: { src: string; alt: string; caption?: string }[];
-}
+import type { ResearchBlog } from "./types";
 
-export const researchBlogs: Record<string, ResearchBlog> = {
-  "vqe-benchmarking": {
-    title: "VQE Benchmarking",
-    project: "VQE Benchmarking",
-    introductionHeading: "Why Molecular Simulation is an Important Problem",
-    methodologyOverview: {
-      src: "/research/vqe/configurability_overview.svg",
-      alt: "Overview of the VQE benchmarking inputs, experiment pipelines, algorithms, and exposed run controls.",
-    },
-    resultsHeading: "Results",
-    resultsContent: "We're currently working on doing a larger re-run of all of our experiments, so we'll be updating this section over the next few weeks. In the meantime, feel free to reach out for a sneak peek.",
-    content: [
-      {
-        type: "paragraph",
-        text: "Finding molecular ground state energies (GSEs) and subsequent excited states to study stability or reactivity is an important problem for applications in material discovery for particular niches, as well as simulating biological molecules.",
-      },
-      {
-        type: "paragraph",
-        text: "However, it is computationally expensive to simulate large molecules! This is a classic problem that we've been historically and currently limited by, as simulation complexity increases exponentially with each additional electron. As a caveat, classical methods that approximate the electron-space are already able to handle many important use-cases, but do not achieve high accuracy for difficult systems. Exact simulation is not a classically tractable problem.",
-      },
-      {
-        type: "expandable",
-        summary: "Why are electrons challenging to represent?",
-        body: "Electrons are not just 'dots' that are in fixed orbitals. Their orbitals are more like 'probability clouds' that interact through Coulomb repulsion with other electrons. Representing their correlated state is part of the computational challenge.",
-      },
-      {
-        type: "paragraph",
-        text: "Quantum computers may provide a solution. While each classical bit can only represent a 0 and a 1, a qubit can be in a superposition of 0 and 1… and multiple qubits can become ‘entangled’.",
-      },
-      {
-        type: "expandable",
-        summary: "What does entanglement mean?",
-        body: "Entanglement means two or more qubits share a joint state, so their measurement results are correlated in ways that cannot be explained by treating each qubit independently.",
-      },
-    ],
-    figures: [],
-  },
-  "protein-ligand-binding-affinity": {
+export const proteinLigandBindingAffinity: ResearchBlog = {
     title: "Classical-Quantum CNNs for Protein-Ligand Binding Affinity",
     project: "Classical-Quantum CNNs for Protein-Ligand Binding Affinity",
     articleTitle: "Varying random unitary circuits in a classically-modelled quantum neural network: how does it affect model predictability?",
@@ -74,11 +18,11 @@ export const researchBlogs: Record<string, ResearchBlog> = {
       },
       {
         type: "paragraph",
-        text: "The main focus of this blog post will be based on a key study by Domingo et al., published in 2023, and following work from the study. The initial study used a hybrid 3D CNN model, showing the potential for quantum machine learning for such datasets by replacing the penultimate layer with a quantum circuit.1 They found that the performance of the model with the quantum layer was comparable to that of the purely classical model. They tested different numbers of gates (simulating higher quantum gates is more classically expensive). Their hybrid models with a greater number of gates outperformed their classical baseline for the Pearson correlation of ~0.677. Their hybrid 300, 500, and 600 gate models performed with Pearson correlations of 0.685, 0.695, and 0.699 respectively.",
+        text: "The main focus of this blog post will be based on a key study by Domingo et al., published in 2023, and following work from the study. The initial study used a hybrid 3D CNN model, showing the potential for quantum machine learning for such datasets by replacing the penultimate layer with a quantum circuit.[[ref:domingo-2023]] They found that the performance of the model with the quantum layer was comparable to that of the purely classical model. They tested different numbers of gates (simulating higher quantum gates is more classically expensive). Their hybrid models with a greater number of gates outperformed their classical baseline for the Pearson correlation of ~0.677. Their hybrid 300, 500, and 600 gate models performed with Pearson correlations of 0.685, 0.695, and 0.699 respectively.",
       },
       {
         type: "paragraph",
-        text: "A paper by Jones et al., published in 2021 used a more efficient classical model (combining the 3DCNN and the spatial graph CNN, i.e. SGCNN).2 It achieved a Pearson correlation coefficient of 0.810 using their Fusion model. The 3DCNN and SGCNN models on the refined set performed with R values 0.666 and 0.723 respectively, demonstrating an improvement through using feature extraction from both models.",
+        text: "A paper by Jones et al., published in 2021 used a more efficient classical model (combining the 3DCNN and the spatial graph CNN, i.e. SGCNN).[[ref:jones-2021]] It achieved a Pearson correlation coefficient of 0.810 using their Fusion model. The 3DCNN and SGCNN models on the refined set performed with R values 0.666 and 0.723 respectively, demonstrating an improvement through using feature extraction from both models.",
       },
       {
         type: "paragraph",
@@ -120,7 +64,7 @@ export const researchBlogs: Record<string, ResearchBlog> = {
       { type: "heading", text: "Methodology" },
       {
         type: "paragraph",
-        text: "Our main results can be replicated in the Github repository linked at the bottom of the paper. We based our work off of the FAST repository,3 as well as the quantum-3DCNN hybrid repository.4",
+        text: "Our main results can be replicated in the Github repository linked at the bottom of the paper. We based our work off of the FAST repository,[[ref:fast-repo]] as well as the quantum-3DCNN hybrid repository.[[ref:ingenii-repo]]",
       },
       {
         type: "paragraph",
@@ -173,7 +117,7 @@ export const researchBlogs: Record<string, ResearchBlog> = {
       { type: "heading", level: 3, text: "How we tested different random unitary circuits:" },
       {
         type: "paragraph",
-        text: "In order to build on the paper’s findings, we decided to test random quantum reservoir circuits from the G3 family, and compare performance. We generated 100 random gates, and then preselected the top 25 using an expressibility criterion (RFD), then compared their predictive performance, using r2 and adjusted r2 values. We used RFD instead of fidelity-variance, since fidelity can be less discriminative for deep G3-like circuits due to higher levels of entanglement that aren’t captured by just the state-overlaps.5 As the Domingo paper had found diminishing returns at ~300 gates, our circuit size was also set to 300.",
+        text: "In order to build on the paper’s findings, we decided to test random quantum reservoir circuits from the G3 family, and compare performance. We generated 100 random gates, and then preselected the top 25 using an expressibility criterion (RFD), then compared their predictive performance, using r2 and adjusted r2 values. We used RFD instead of fidelity-variance, since fidelity can be less discriminative for deep G3-like circuits due to higher levels of entanglement that aren’t captured by just the state-overlaps.[[ref:bi-2025]] As the Domingo paper had found diminishing returns at ~300 gates, our circuit size was also set to 300.",
       },
       {
         type: "paragraph",
@@ -183,24 +127,21 @@ export const researchBlogs: Record<string, ResearchBlog> = {
         type: "paragraph",
         text: "Our code: https://github.com/sanskriti-ss/bindingaffinity",
       },
+    ],
+    references: [
       {
-        type: "paragraph",
-        text: "1\nDomingo, L., Djukic, M., Johnson, C., & Borondo, F. (2023). Binding affinity predictions with hybrid quantum-classical convolutional neural networks. Scientific Reports, 13(1), Article 17951. https://doi.org/10.1038/s41598-023-45269-y",
+        id: "domingo-2023",
+        text: "Domingo, L., Djukic, M., Johnson, C., & Borondo, F. (2023). Binding affinity predictions with hybrid quantum-classical convolutional neural networks. Scientific Reports, 13(1), Article 17951. https://doi.org/10.1038/s41598-023-45269-y",
       },
       {
-        type: "paragraph",
-        text: "2\nJones, D., Kim, H., Zhang, X., Zemla, A., Stevenson, G., Bennett, W. F. D., Kirshner, D., Wong, S. E., Lightstone, F. C., & Allen, J. E. (2021). Improved Protein–Ligand Binding Affinity Prediction with Structure-Based Deep Fusion Inference. Journal of Chemical Information and Modeling, 61(4), 1583–1592. https://doi.org/10.1021/acs.jcim.0c01306",
+        id: "jones-2021",
+        text: "Jones, D., Kim, H., Zhang, X., Zemla, A., Stevenson, G., Bennett, W. F. D., Kirshner, D., Wong, S. E., Lightstone, F. C., & Allen, J. E. (2021). Improved Protein–Ligand Binding Affinity Prediction with Structure-Based Deep Fusion Inference. Journal of Chemical Information and Modeling, 61(4), 1583–1592. https://doi.org/10.1021/acs.jcim.0c01306",
       },
-      { type: "paragraph", text: "3\nhttps://github.com/LLNL/FAST" },
+      { id: "fast-repo", text: "https://github.com/LLNL/FAST" },
+      { id: "ingenii-repo", text: "https://github.com/ingenii-solutions/ingenii-quantum-hybrid-networks/." },
       {
-        type: "paragraph",
-        text: "4\nhttps://github.com/ingenii-solutions/ingenii-quantum-hybrid-networks/.",
-      },
-      {
-        type: "paragraph",
-        text: "5\nBi, X.-Y., Yu, Y.-M., Chen, Y.-H., & Zhong, Z.-R. (2025). General-purpose quantum architecture search based on deep reinforcement learning. Physical Review. A, 112(5), Article 052409. https://doi.org/10.1103/7rc4-p446",
+        id: "bi-2025",
+        text: "Bi, X.-Y., Yu, Y.-M., Chen, Y.-H., & Zhong, Z.-R. (2025). General-purpose quantum architecture search based on deep reinforcement learning. Physical Review. A, 112(5), Article 052409. https://doi.org/10.1103/7rc4-p446",
       },
     ],
-    figures: [],
-  },
-};
+  };

@@ -1,7 +1,30 @@
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import type { ResearchBlog } from "./blogs";
+import type { ResearchBlog } from "./blog-data";
+
+function renderBlogText(text: string, post: ResearchBlog) {
+  const pieces = text.split(/(\[\[ref:[\w-]+\]\]|https?:\/\/\S+)/g);
+  return pieces.map((piece, index) => {
+    const citation = piece.match(/^\[\[ref:([\w-]+)\]\]$/);
+    if (citation) {
+      const referenceIndex = post.references?.findIndex((reference) => reference.id === citation[1]) ?? -1;
+      if (referenceIndex < 0) return piece;
+      const reference = post.references![referenceIndex];
+      return (
+        <sup key={index} className="ml-0.5 text-xs">
+          <a id={`citation-${reference.id}`} href={`#reference-${reference.id}`} className="font-semibold text-[#234285] hover:underline">
+            {referenceIndex + 1}
+          </a>
+        </sup>
+      );
+    }
+    if (/^https?:\/\//.test(piece)) {
+      return <a key={index} href={piece} className="break-all underline underline-offset-2 hover:text-[#234285]">{piece}</a>;
+    }
+    return piece;
+  });
+}
 
 /** Shared source of truth for research blog post presentation. */
 export default function BlogPost({ post }: { post: ResearchBlog }) {
@@ -38,9 +61,17 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
               </section>
             )}
             {post.content?.map((block, index) => {
-              if (block.type === "paragraph") return <p key={index}>{block.text}</p>;
+              if (block.type === "paragraph") return <p key={index}>{renderBlogText(block.text, post)}</p>;
               if (block.type === "caption") {
                 return <p key={index} className="text-sm leading-relaxed text-[#234285]/65">{block.text}</p>;
+              }
+              if (block.type === "figure") {
+                return (
+                  <figure key={`${block.src}-${index}`} className="space-y-2">
+                    <Image src={block.src} alt={block.alt} width={1200} height={800} className="h-auto w-full" />
+                    {block.caption && <figcaption className="text-sm text-[#234285]/65">{block.caption}</figcaption>}
+                  </figure>
+                );
               }
               if (block.type === "heading") {
                 return block.level === 3 ? (
@@ -80,21 +111,19 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
                 {post.resultsContent && <p className="mt-4">{post.resultsContent}</p>}
               </section>
             )}
-            {/* Figures are configured in blogs.ts. */}
-            {post.figures.map((figure) => (
-              <figure key={figure.src} className="space-y-2">
-                <Image
-                  src={figure.src}
-                  alt={figure.alt}
-                  width={1200}
-                  height={800}
-                  className="h-auto w-full rounded-xl"
-                />
-                {figure.caption && (
-                  <figcaption className="text-sm text-[#234285]/60">{figure.caption}</figcaption>
-                )}
-              </figure>
-            ))}
+            {post.references && post.references.length > 0 && (
+              <section aria-labelledby="blog-references" className="border-t border-[#234285]/15 pt-6">
+                <h2 id="blog-references" className="mb-4 text-xl font-bold text-[#234285]">References</h2>
+                <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed">
+                  {post.references.map((reference) => (
+                    <li key={reference.id} id={`reference-${reference.id}`} className="scroll-mt-8 pl-1">
+                      {renderBlogText(reference.text, post)}{" "}
+                      <a href={`#citation-${reference.id}`} aria-label="Back to citation" className="ml-1 text-[#234285] hover:underline">↩</a>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
           </div>
         </article>
       </main>
