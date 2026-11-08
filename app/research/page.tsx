@@ -1,7 +1,29 @@
 import Image from "next/image";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { researchProjects } from "./projects";
+import { researchTeam } from "./team";
+
+const headshotExtensions = ["jpg", "jpeg", "png", "webp"];
+
+function getHeadshot(stem: string) {
+  const publicDirectory = path.join(process.cwd(), "public");
+  const extension = headshotExtensions.find((candidate) =>
+    existsSync(path.join(publicDirectory, "research", "headshots", `${stem}.${candidate}`)),
+  );
+  return extension ? `/research/headshots/${stem}.${extension}` : null;
+}
+
+function getInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("");
+}
 
 export default function ResearchPage() {
   return (
@@ -45,6 +67,32 @@ export default function ResearchPage() {
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+          <section aria-labelledby="research-team" className="mt-14">
+            <h2 id="research-team" className="mb-6 text-2xl font-bold text-[#234285]">
+              Research Team
+            </h2>
+            <div className="divide-y divide-[#234285]/20 border-y border-[#234285]/20">
+              {researchTeam.map((member) => {
+                const headshot = getHeadshot(member.headshot);
+                return (
+                  <article key={member.name} className="flex items-center gap-5 py-5 sm:gap-6 sm:py-6">
+                    <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#234285]/10 text-sm font-bold text-[#234285] sm:h-20 sm:w-20">
+                      {headshot ? (
+                        <Image src={headshot} alt={member.name} fill sizes="80px" className="object-cover" />
+                      ) : (
+                        <span aria-hidden="true">{getInitials(member.name)}</span>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#234285]">{member.name}</h3>
+                      <p className="mt-1 text-[#234285]/70">{member.role}</p>
+                      {member.blurb && <p className="mt-2 max-w-3xl text-[#234285]/70">{member.blurb}</p>}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
         </div>
