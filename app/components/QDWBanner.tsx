@@ -42,7 +42,7 @@ export default function QDWBanner() {
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse inline-block" />
-                Upcoming Event
+                Past Event!
               </motion.div>
 
               <motion.h2
@@ -66,7 +66,7 @@ export default function QDWBanner() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
-                Join QCSA at UCLA for a day of cutting-edge talks, hands-on demos, and networking
+                See previously at QCSA at UCLA for a day of cutting-edge talks, hands-on demos, and networking
                 with researchers, engineers, and students leading the quantum revolution.
               </motion.p>
 
