@@ -17,6 +17,13 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
             <h1 className="text-3xl font-bold text-[#234285] sm:text-4xl">{post.title}</h1>
           </header>
           <div className="space-y-6 text-[#234285]/80">
+            {post.introductionHeading && (
+              <section aria-labelledby="blog-introduction">
+                <h2 id="blog-introduction" className="mb-4 text-2xl font-bold text-[#234285]">
+                  {post.introductionHeading}
+                </h2>
+              </section>
+            )}
             {post.content?.map((block, index) => block.type === "paragraph" ? (
               <p key={index}>{block.text}</p>
             ) : (
@@ -27,6 +34,27 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
                 <p className="mt-4 leading-relaxed">{block.body}</p>
               </details>
             ))}
+            {post.methodologyOverview && (
+              <section aria-labelledby="methodology-overview" className="space-y-4 pt-6">
+                <h2 id="methodology-overview" className="text-2xl font-bold text-[#234285]">
+                  Methodology Overview
+                </h2>
+                <Image
+                  src={post.methodologyOverview.src}
+                  alt={post.methodologyOverview.alt}
+                  width={1600}
+                  height={1120}
+                  className="h-auto w-full"
+                />
+              </section>
+            )}
+            {post.resultsHeading && (
+              <section aria-labelledby="blog-results" className="pt-6">
+                <h2 id="blog-results" className="text-2xl font-bold text-[#234285]">
+                  {post.resultsHeading}
+                </h2>
+              </section>
+            )}
             {/* Figures are configured in blogs.ts. */}
             {post.figures.map((figure) => (
               <figure key={figure.src} className="space-y-2">

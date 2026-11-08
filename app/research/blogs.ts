@@ -5,6 +5,9 @@ export interface ResearchBlog {
     | { type: "paragraph"; text: string }
     | { type: "expandable"; summary: string; body: string }
   )[];
+  introductionHeading?: string;
+  methodologyOverview?: { src: string; alt: string };
+  resultsHeading?: string;
   /** Add image paths here as the post grows, for example: ["/research/vqe/ansatz.png"]. */
   figures: { src: string; alt: string; caption?: string }[];
 }
@@ -13,6 +16,12 @@ export const researchBlogs: Record<string, ResearchBlog> = {
   "vqe-benchmarking": {
     title: "VQE Benchmarking",
     project: "VQE Benchmarking",
+    introductionHeading: "Why Molecular Simulation is an Important Problem",
+    methodologyOverview: {
+      src: "/research/vqe/configurability_overview.svg",
+      alt: "Overview of the VQE benchmarking inputs, experiment pipelines, algorithms, and exposed run controls.",
+    },
+    resultsHeading: "Results",
     content: [
       {
         type: "paragraph",
