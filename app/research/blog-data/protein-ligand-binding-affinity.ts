@@ -38,25 +38,34 @@ export const proteinLigandBindingAffinity: ResearchBlog = {
       },
       {
         type: "paragraph",
-        text: "Scroll further down for more details on methodology. First, here are the findings, summarized in a lovely violin plot.",
+        text: "Scroll further down for more details on methodology (past the Results section). Here's an overview of the structure of our experiment.",
+      },
+      {
+        type: "figure",
+        src: "/research/protein-ligand/figure-1-model-architecture.png",
+        alt: "Diagram of the hybrid quantum model, from protein-ligand inputs through 3D-CNN and SG-CNN feature extraction, fusion, quantum reservoir, and affinity prediction.",
+        caption: "Figure 1: Hybrid Quantum model architecture inspired by (2; 7). For more details see appendix.",
       },
       {
         type: "heading",
         text: "Results: What did we find? How much do the circuits affect the r2 of the protein-ligand binding affinities?",
       },
       {
-        type: "caption",
-        text: "Figure 1: Comparison of unitary-gate swaps by quartile, for adjusted R2. Note that the better performing quartile median is around 0.932, while the bottom quartile is around 0.931, showing a minimal improvement.",
+        type: "figure",
+        src: "/research/protein-ligand/figure-2-experiments.png",
+        alt: "Five panels showing layer-depth, fixed versus parameterized circuits, kernel baselines, circuit feature effects, and gate transition patterns.",
+        caption: "Figure 2: Overview of experiments testing sensitivity to the quantum layer. (a) Holdout R² as one through five layers are replaced with independent fixed random unitary circuits containing three G3 gates per layer. Performance remains closely clustered across the number of replaced layers. (b) Comparison of fixed and parameterizable circuits with 3, 10, and 30 G3 gates. Neither additional gates nor parametrization yielded a reliable improvement. (c) Kernel comparisons using the full 64-feature representation, 12-dimensional PCA and projection controls, and G3/G2 quantum representations with 20 or 200 gates. The quantum representations have lower mean holdout R² than the plotted classical controls. Error bars indicate one standard deviation. (d) Gate-composition features comparing higher- and lower-performing circuits. (e) First-order transition-frequency differences between higher- and lower-performing circuits. Together, the experiments show limited sensitivity to the number, parametrization, and simple composition of the tested quantum circuits.",
       },
       {
         type: "paragraph",
         text: "This signifies that given a large enough depth (e.g. 300 circuits), the identity of the gates chosen from the G3 family does not significantly impact results.",
       },
       {
-        type: "caption",
-        text: "Figure 2: Comparison of best circuit versus past best_model, for the validation set.",
+        type: "figure",
+        src: "/research/protein-ligand/figure-3-ablation-kernels.png",
+        alt: "Three panels comparing a twelve-qubit ablation, kernel baselines, and RFD and CKA scores against test R-squared.",
+        caption: "Figure 3: (a) Twelve-qubit ablation comparing the no-quantum baseline, G3 and G2 circuits with and without a skip connection, and a random-feature control. Mean holdout R² values cluster around 0.473–0.475. (b) Kernel comparisons for the full-64, PCA-12, and projection-12 RBF baselines and G3/G2 quantum representations with 20 or 200 gates. Panels (a–b) report means with one standard deviation across 10 replicates. (c) RFD and CKA versus test R² across 20 circuits. Neither correlation is statistically significant in this sweep (RFD: r = 0.053, p = 0.823; CKA: r = 0.274, p = 0.242).",
       },
-      { type: "caption", text: "Figure 3: Sample unitary circuit" },
       {
         type: "paragraph",
         text: "There were also scripts written in order to determine if there were any statistically significant differences in the patterns between the top and bottom quartile-performing unitary circuits (such as frequency of different gates, frequency of gate order (e.g. CX after H), etc. and a full list of these tests can be found in the repository. They were all found to be statistically insignificant, which is mostly in line with the rest of the literature regarding difficulty interpreting why some circuits perform better for different tasks. However, this gives the chance for future researchers to conduct more experiments on our codebase.",
@@ -73,10 +82,6 @@ export const proteinLigandBindingAffinity: ResearchBlog = {
       {
         type: "paragraph",
         text: "The PDB data format can be processed into a 19x48x48x48 grid, where the protein pocket and ligand are scaled, centered to the middle of the grid, and then broken into a 3D grid with dimensions of 48 angstroms in the x, y, and z dimensions. Each of these cubed units in the grid will have 22 different parameters: e.g. a score for carbon bonds, a score for heavy metals, etc. Note that most papers used 19 different parameters, but we one-hot encoded one of the parameters (hybridization), which resulted in the three extra. The core PDB dataset includes 228 protein-ligand complexes.",
-      },
-      {
-        type: "caption",
-        text: "Figure 4: Visualized slices of a randomly selected protein, with values for channel/parameter 1 (carbon), and channel/parameter 2 (nitrogen), visualized on the left and right respectively.",
       },
       {
         type: "heading",
@@ -109,10 +114,6 @@ export const proteinLigandBindingAffinity: ResearchBlog = {
       {
         type: "paragraph",
         text: "The quantum network used in our exploration was constructed by using a fully connected quantum layer from the ingenii repository. We took the 16-dimensional inputs described earlier, passed them through a fully connected layer to decrease the number of inputs to the quantum layer, and finally added another fully connected layer at the output of the quantum layer. We performed limited hyperparameter tuning to choose the best configuration for the quantum fusion model.",
-      },
-      {
-        type: "caption",
-        text: "Table 1: Comparison of the models. All the models except the Deepchem had the same train-test-val split for consistency.",
       },
       { type: "heading", level: 3, text: "How we tested different random unitary circuits:" },
       {
