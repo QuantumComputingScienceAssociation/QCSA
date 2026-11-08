@@ -5,7 +5,6 @@ export const proteinLigandBindingAffinity: ResearchBlog = {
     project: "Classical-Quantum CNNs for Protein-Ligand Binding Affinity",
     articleTitle: "Varying random unitary circuits in a classically-modelled quantum neural network: how does it affect model predictability?",
     articleByline: "Based on work done by Sanskriti Shindadkar, Clyde Villacrusis, Manvi Agrawal, Hayk Gargaloyan, and Karen Mosoyan",
-    articleAuthor: "Sanskriti",
     articleDate: "May 03, 2026",
     content: [
       {
