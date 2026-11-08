@@ -27,6 +27,12 @@ export default function Navbar() {
         >
           Gallery
         </a>
+        <a
+          href="/research"
+          className="text-sm font-semibold text-blue-900 hover:text-gray-900 transition-colors"
+        >
+          Research
+        </a>
         <Button href="/coming-soon" size="sm" className="font-semibold rounded-md bg-blue-900">
           Donate
         </Button>
