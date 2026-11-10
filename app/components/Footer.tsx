@@ -18,12 +18,6 @@ export default function Footer() {
           <p>EIN: 33-3759985</p>
           <p>405 Hilgard Ave, Room 5408, UCLA, Los Angeles, CA 90025</p>
           <p>
-            General inquiries:{" "}
-            <a href="mailto:info@qcsa.org" className="underline underline-offset-2">
-              info@qcsa.org
-            </a>
-          </p>
-          <p>
             UCLA inquiries:{" "}
             <a href="mailto:quantum.ucla@gmail.com" className="underline underline-offset-2">
               quantum.ucla@gmail.com
