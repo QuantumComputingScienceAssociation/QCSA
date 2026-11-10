@@ -12,8 +12,8 @@ export default function CTA() {
           Whether you&apos;re a student, researcher, or quantum enthusiast,
           there&apos;s a place for you in QCSA
         </p>
-        <Button href="/coming-soon" size="lg" className="bg-blue-900">
-          Learn More
+        <Button href="/research" size="lg" className="bg-blue-900">
+          Explore Our Research
           <ArrowRight size={14} stroke="white" />
         </Button>
       </div>

@@ -55,7 +55,7 @@ const boardMembers: TeamMember[] = [
     major: "Physics",
     year: "2nd Year",
     bio: "Ilaana is an undergraduate at UCLA studying Biophysics and on the QCSA leadership board. She is involved in the research of computational fluid dynamics to model blood vessels, talent development via mixed-methods psychology, and modeling distant stars in the Milky Way galaxy. Ilaana has previously worked with the American Cancer Society, ACM, City of Austin Law Department, Society of Robotic Surgeons, and Ascension Seton Medical Center in Austin. At UCLA, Ilaana is an editor at the Society and Genetics Research Journal and co-manager of the Upsilon Lab CFD group. She is also a nationally registered Emergency Medical Technician. Outside of her academic involvements, Ilaana loves Roblox, Minecraft, and caffeine.",
-    image: "/Ilaana.png",
+    image: "/ilaana-web.webp",
     linkedIn: "https://www.linkedin.com/in/ilaanak/",
   },
   {
@@ -115,7 +115,7 @@ const boardMembers: TeamMember[] = [
     major: "Electrical Engineering",
     year: "PhD",
     bio: "Matt is an Electrical Engineering PhD student at UCLA researching quantum-limited cavity optomechanics in the Mesoscopic Optics and Quantum Electronics Laboratory. Before joining UCLA, he received his B.S. in Electrical and Computer Engineering from UIUC, where he explored the intersection of NV centers and plasmonics. Matt has previously studied distributed computing at Northrop Grumman and superconducting qubit packaging at Applied Materials. Outside of the lab, he loves to cycle, produce music, and jam on his sax.",
-    image: "/matt.JPG",
+    image: "/matt-web.webp",
     linkedIn: "https://www.linkedin.com/in/matthew-guibord/",
   },
   {
@@ -155,7 +155,7 @@ const boardMembers: TeamMember[] = [
     major: "Computer Science",
     year: "1st Year",
     bio: "Ivan is a Computer Science student at UCLA, originally from Singapore. As part of QCSA's tech team, he works on building and maintaining the club's various websites. Outside of QCSA, he's also a developer on UCLA's ACM Dev Team and on UCLA MentorSEAS, where he supports incoming engineering students. On the quantum side, he's more of a \"curious observer\" than researcher. When he's not writing code, he's probably eating in the dining halls.",
-    image: "/ivan.jpg",
+    image: "/ivan-web.webp",
     linkedIn: "https://www.linkedin.com/in/ivan-fang-dev/",
   },
   {
@@ -223,7 +223,7 @@ const facultyLeadership: FacultyMember[] = [
   },
 ];
 
-const teamBranches = ['UCLA', 'Caltech', 'USC', 'UCSD', 'UCSB', 'QDC'];
+const teamBranches = ['UCLA', 'QDC'];
 
 export default function AboutPage() {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
@@ -413,23 +413,7 @@ export default function AboutPage() {
                   </motion.div>
                 ))}
               </div>
-            ) : (
-              <motion.div
-                key={selectedBranch}
-                className="flex flex-col items-center justify-center py-20 text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="relative w-56 h-56 mb-6">
-                  <Image src="/quantum_aura.png" alt="" fill className="object-contain opacity-40" />
-                </div>
-                <h3 className="text-2xl font-bold text-[#234285] mb-3">Coming Soon</h3>
-                <p className="text-[#234285]/60 max-w-sm leading-relaxed">
-                  Leadership profiles for our {selectedBranch} chapter will be added here soon.
-                </p>
-              </motion.div>
-            )}
+            ) : null}
           </div>
         </section>
 
@@ -467,7 +451,7 @@ export default function AboutPage() {
                         fill
                         className="object-cover"
                       />
-                      {isMobile && (
+                      {isMobile && faculty.linkedIn && (
                         <button
                           className="absolute top-2 right-2 w-8 h-8 bg-[#234285] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg hover:bg-blue-700 transition-colors z-10"
                           onClick={(e) => {

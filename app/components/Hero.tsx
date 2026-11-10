@@ -8,8 +8,8 @@ export default function Hero() {
         <br />
         <span className="text-blue-900">Quantum Computing</span>
       </h1>
-      <Button href="/coming-soon" variant="outline" size="md" className="mt-2">
-        Learn More
+      <Button href="/#mission" variant="outline" size="md" className="mt-2">
+        Explore Our Mission
       </Button>
     </section>
   );

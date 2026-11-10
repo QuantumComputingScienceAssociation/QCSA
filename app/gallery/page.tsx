@@ -23,7 +23,7 @@ const photos: GalleryItem[] = [
   { src: '/qube_poster.png', alt: 'Qube Poster', branch: 'UCLA' },
   { src: '/QuantumClasses_Graphic.png', alt: 'Quantum Classes', branch: 'UCLA' },
   { src: '/QCSA_Flyer_Dolev_Bluvstein.jpg', alt: 'Dolev Bluvstein Talk', branch: 'UCLA' },
-  { src: '/qcf-flyer-final.png', alt: 'QCF Flyer', branch: 'UCLA' },
+  { src: '/qcf-flyer-web.webp', alt: 'QCF Flyer', branch: 'UCLA' },
   { src: '/join-us.png', alt: 'Join QCSA', branch: 'UCLA' },
   { src: '/Newsletter_Graphic.png', alt: 'QCSA Newsletter', branch: 'UCLA' },
   { src: '/ucla_acm.png', alt: 'UCLA x ACM', branch: 'UCLA' },
@@ -32,7 +32,7 @@ const photos: GalleryItem[] = [
   { src: '/qdw2026Poster.png', alt: 'QDW 2026', branch: 'QDC' },
 ];
 
-const branches = ['All', 'UCLA', 'Caltech', 'USC', 'UCSD', 'UCSB', 'QDC'];
+const branches = ['All', ...Array.from(new Set(photos.map((photo) => photo.branch)))];
 
 export default function GalleryPage() {
   const [activeBranch, setActiveBranch] = useState('All');

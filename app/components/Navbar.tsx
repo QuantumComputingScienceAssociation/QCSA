@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-[#eaf0fc] border-b border-blue-100">
-      <a href="/" className="relative h-10 w-19 overflow-hidden block">
+    <nav aria-label="Main navigation" className="flex flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-8 bg-[#eaf0fc] border-b border-blue-100">
+      <Link href="/" className="relative h-10 w-19 overflow-hidden block">
         <Image
           src="/QCSA-Logo-2.webp"
           alt="QCSA Logo — go to home"
@@ -13,8 +13,8 @@ export default function Navbar() {
           sizes="48px"
           className="object-contain scale-200"
         />
-      </a>
-      <div className="flex items-center gap-6">
+      </Link>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-x-6">
         <a
           href="/about-us"
           className="text-sm font-semibold text-blue-900 hover:text-gray-900 transition-colors"
@@ -33,9 +33,6 @@ export default function Navbar() {
         >
           Research
         </a>
-        <Button href="/coming-soon" size="sm" className="font-semibold rounded-md bg-blue-900">
-          Donate
-        </Button>
       </div>
     </nav>
   );

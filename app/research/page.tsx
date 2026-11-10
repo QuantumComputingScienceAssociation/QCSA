@@ -1,9 +1,18 @@
 import Image from "next/image";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { researchProjects } from "./projects";
 import { previousResearchTeam, researchTeam } from "./team";
 import TeamHeadshot from "./TeamHeadshot";
+
+function findHeadshot(stem: string) {
+  const extension = ["jpg", "jpeg", "png", "webp"].find((ext) =>
+    existsSync(path.join(process.cwd(), "public", "research", "headshots", `${stem}.${ext}`))
+  );
+  return extension ? `/research/headshots/${stem}.${extension}` : undefined;
+}
 
 export default function ResearchPage() {
   return (
@@ -57,7 +66,7 @@ export default function ResearchPage() {
               {researchTeam.map((member) => {
                 return (
                   <article key={member.name} className="flex items-center gap-5 py-3 sm:gap-6">
-                    <TeamHeadshot name={member.name} stem={member.headshot} />
+                    <TeamHeadshot name={member.name} src={findHeadshot(member.headshot)} />
                     <div>
                       <h3 className="text-lg font-bold text-[#234285]">{member.name}</h3>
                       <p className="mt-1 text-[#234285]/70">{member.role}</p>
@@ -68,25 +77,23 @@ export default function ResearchPage() {
               })}
             </div>
           </section>
-          <section aria-labelledby="previous-members" className="mt-14">
+          {previousResearchTeam.length > 0 && <section aria-labelledby="previous-members" className="mt-14">
             <h2 id="previous-members" className="mb-6 text-2xl font-bold text-[#234285]">
               Previous Members
             </h2>
             <div className="grid gap-x-12 gap-y-8 border-y border-[#234285]/20 py-6 sm:grid-cols-2 sm:gap-y-10">
-              {previousResearchTeam.length ? previousResearchTeam.map((member) => (
+              {previousResearchTeam.map((member) => (
                 <article key={member.name} className="flex items-center gap-5 py-3 sm:gap-6">
-                  <TeamHeadshot name={member.name} stem={member.headshot} />
+                  <TeamHeadshot name={member.name} src={findHeadshot(member.headshot)} />
                   <div>
                     <h3 className="text-lg font-bold text-[#234285]">{member.name}</h3>
                     <p className="mt-1 text-[#234285]/70">{member.role}</p>
                     {member.blurb && <p className="mt-2 max-w-3xl text-[#234285]/70">{member.blurb}</p>}
                   </div>
                 </article>
-              )) : (
-                <p className="col-span-full text-[#234285]/70">Previous members will be listed here.</p>
-              )}
+              ))}
             </div>
-          </section>
+          </section>}
         </div>
       </main>
       <Footer />

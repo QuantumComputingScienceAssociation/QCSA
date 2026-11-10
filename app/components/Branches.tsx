@@ -2,9 +2,9 @@ import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import ucla from "../../public/ucla.webp";
 import caltech from "../../public/caltech.webp";
-import usc from "../../public/usc.webp";
-import ucsd from "../../public/ucsd.webp";
-import qdc from "../../public/qdc.webp";
+import usc from "../../public/usc-web.webp";
+import ucsd from "../../public/ucsd-web.webp";
+import qdc from "../../public/qdc-web.webp";
 
 type Branch = {
   name: string;
@@ -39,7 +39,7 @@ const branches: Branch[] = [
   },
   {
     name: "QDC",
-    subtext: "Quantum Device Community",
+    subtext: "Quantum Device Consortium",
     image: qdc,
     href: "https://qdc-qcsa.org",
   },
@@ -57,7 +57,7 @@ export default function Branches() {
             QCSA chapters across California&apos;s leading universities
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {branches.map((branch) => {
             const inner = (
               <>
@@ -69,10 +69,12 @@ export default function Branches() {
                   className={branch.imageClassName ?? "object-cover"}
                   placeholder="blur"
                 />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-                <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-md">
-                  <ArrowUpRight size={16} stroke="white" strokeWidth={2.5} />
-                </div>
+                <div className={`absolute inset-0 bg-black/30 transition-colors ${branch.href ? "group-hover:bg-black/40" : ""}`} />
+                {branch.href && (
+                  <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-md">
+                    <ArrowUpRight size={16} stroke="white" strokeWidth={2.5} />
+                  </div>
+                )}
                 <div className="absolute bottom-4 left-4 right-4 z-10">
                   <span className="block text-white text-base font-semibold tracking-wide">
                     {branch.name}
@@ -84,7 +86,7 @@ export default function Branches() {
               </>
             );
             const sharedClass =
-              "relative rounded-2xl overflow-hidden aspect-4/3 cursor-pointer group shadow-sm bg-gray-900";
+              "relative rounded-2xl overflow-hidden aspect-4/3 group shadow-sm bg-gray-900";
             return branch.href ? (
               <a
                 key={branch.name}

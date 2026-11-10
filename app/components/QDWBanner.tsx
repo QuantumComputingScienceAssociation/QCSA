@@ -66,8 +66,8 @@ export default function QDWBanner() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
-                See previously at QCSA at UCLA for a day of cutting-edge talks, hands-on demos, and networking
-                with researchers, engineers, and students leading the quantum revolution.
+                QCSA at UCLA hosted a day of talks, hands-on demos, and networking
+                with researchers, engineers, and students working in quantum technology.
               </motion.p>
 
               <motion.div
@@ -92,7 +92,7 @@ export default function QDWBanner() {
 
             {/* Right — poster */}
             <motion.div
-              className="relative flex-shrink-0 w-96 sm:w-[480px] lg:w-[560px]"
+              className="relative flex-shrink-0 w-full max-w-96 sm:max-w-[480px] lg:max-w-[560px]"
               initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: -2 }}
               transition={{ delay: 0.3, duration: 0.6, type: 'spring', stiffness: 120 }}

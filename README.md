@@ -27,7 +27,7 @@ QCSA brings together chapters at UCLA, Caltech, USC, UCSD, and UCSB, as well as 
 | `/` | Homepage — Hero, Mission, Branch cards, QDW 2026 banner, CTA |
 | `/about-us` | Team page — branch tabs, board member cards with hover bios, faculty advisors |
 | `/gallery` | Photo gallery — branch-filtered masonry grid with lightbox |
-| `/coming-soon` | Placeholder for the Donate page |
+| `/research` | Research projects, articles, and team |
 
 ---
 
@@ -101,10 +101,18 @@ The export is configured in `next.config.ts`, with Next.js image optimization di
 
 ---
 
+## Google Ad Grants website review
+
+- Keep the organization's public mailing address and EIN in `app/components/Footer.tsx` up to date.
+- Check [Google's website policy](https://support.google.com/nonprofits/answer/1657899) and test the deployed site and links before applying. Review mobile performance with [PageSpeed Insights](https://pagespeed.web.dev/).
+- If a secure donation page becomes available, add a working link; the site does not currently have a donation page.
+
+---
+
 ## Branch Links
 
 | Branch | Website |
 |---|---|
 | UCLA | [qcsa-ucla.org](https://qcsa-ucla.org) |
 | QDC | [qdc-qcsa.org](https://qdc-qcsa.org) |
-| Caltech, USC, UCSD, UCSB | Coming soon |
+| Caltech, USC, UCSD | No website link currently listed |

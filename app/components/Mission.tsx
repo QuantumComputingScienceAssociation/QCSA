@@ -38,9 +38,10 @@ export default function Mission() {
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
         <p className="text-gray-500 text-base leading-relaxed mb-14 max-w-2xl mx-auto">
-          QCSA brings together quantum computing enthusiasts across California
-          universities to learn, collaborate, and advance the field of quantum
-          computing through education and research.
+          The Quantum Computing Science Association (QCSA) is a 501(c)(3)
+          nonprofit that brings together quantum computing enthusiasts across
+          California universities to learn, collaborate, and advance the field
+          through education and research.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {pillars.map((pillar) => (
@@ -61,6 +62,25 @@ export default function Mission() {
               </p>
             </div>
           ))}
+        </div>
+        <div className="mt-14 max-w-2xl mx-auto text-left text-gray-700 leading-relaxed">
+          <h3 className="text-xl font-bold text-gray-900 mb-3">What We Do</h3>
+          <p>
+            Our community connects students, researchers, and industry
+            professionals through workshops, talks, hackathons, and
+            collaborative projects. These activities give participants
+            opportunities to learn quantum computing concepts and explore
+            applications together.
+          </p>
+          <p className="mt-4">
+            Our research projects explore topics such as variational quantum
+            eigensolvers and hybrid classical-quantum models for molecular
+            science. Visit our{" "}
+            <a href="/research" className="font-semibold text-blue-900 underline underline-offset-2">
+              research page
+            </a>{" "}
+            to read about the projects and contact the research team.
+          </p>
         </div>
       </div>
     </section>
