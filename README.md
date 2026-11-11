@@ -56,7 +56,7 @@ app/
 ├── gallery/
 │   └── page.tsx              # Photo gallery
 ├── coming-soon/
-│   └── page.tsx              # Donate placeholder
+│   └── page.tsx              # Legacy link to QCSA information
 └── components/
     ├── Navbar.tsx            # Site-wide navigation (logo → home)
     ├── Hero.tsx              # Homepage hero section
@@ -101,11 +101,17 @@ The export is configured in `next.config.ts`, with Next.js image optimization di
 
 ---
 
-## Google Ad Grants website review
+## Required Google Ad Grants website checklist
 
-- Keep the organization's public mailing address and EIN in `app/components/Footer.tsx` up to date.
-- Check [Google's website policy](https://support.google.com/nonprofits/answer/1657899) and test the deployed site and links before applying. Review mobile performance with [PageSpeed Insights](https://pagespeed.web.dev/).
-- If a secure donation page becomes available, add a working link; the site does not currently have a donation page.
+Every developer and reviewer must use this checklist for website changes before merging, and verify affected behavior on the deployed site. The [Google Ad Grants website policy](https://support.google.com/nonprofits/answer/1657899) is the authoritative source and may change; review it when making or reviewing changes. This checklist supports review but does not guarantee compliance or continued approval.
+
+- **Mission and identity:** Keep the nonprofit's mission, activities, and intended audience clear and supported by substantial, original content. Keep the public nonprofit status, address, and EIN in [`app/components/Footer.tsx`](app/components/Footer.tsx) accurate; confirm changes with QCSA leadership. Only publish contact addresses that are monitored and intended for public inquiries.
+- **Complete, functional pages:** Do not publish placeholder pages, nonworking buttons, or links to unfinished sites. List Caltech, USC, and UCSD as branches without linking to their websites until those sites are ready. Test changed internal and external links, navigation, contact links, and forms.
+- **Donations and commercial activity:** Do not add a donation button until it points to a working, secure HTTPS donation page. Keep the site focused on QCSA's mission; disclose how any commercial proceeds support nonprofit programs and clearly present financial information.
+- **Advertising:** Ad Grants funds ads promoting the nonprofit; AdSense displays ads on a website. They are different products. Google's website policy says not to display AdSense ads on an Ad Grants site. Do not add AdSense or other advertising integrations without first checking current Google policy and obtaining QCSA leadership approval; AdSense approval alone does not establish Ad Grants compliance.
+- **Security and domains:** Keep the site available over HTTPS without mixed content, and verify HTTP redirects to HTTPS after deployment. QCSA must control any domain submitted for ads; it must directly host the organization's site, not redirect to an unrelated domain or third-party portal. Before using another domain in ads, follow Google's [additional domain approval process](https://support.google.com/grants/contact/grants_v).
+- **Mobile and performance:** Check affected pages and interactions on mobile and desktop. Optimize new images and avoid unnecessary scripts; review deployed mobile performance with [PageSpeed Insights](https://pagespeed.web.dev/).
+- **Build and release:** Run `npm run build` and `npm run lint`, address issues introduced by the change, then test affected pages on the deployed site. Report any checks that could not be completed to the reviewer.
 
 ---
 
