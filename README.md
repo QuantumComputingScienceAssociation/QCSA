@@ -28,6 +28,7 @@ QCSA brings together chapters at UCLA, Caltech, USC, UCSD, and UCSB, as well as 
 | `/about-us` | Team page — branch tabs, board member cards with hover bios, faculty advisors |
 | `/gallery` | Photo gallery — branch-filtered masonry grid with lightbox |
 | `/research` | Research projects, articles, and team |
+| `/nonprofit-info` | Public charity status, organization details, and Tax990 profile |
 
 ---
 
@@ -55,6 +56,8 @@ app/
 │   └── page.tsx              # Team & advisors page
 ├── gallery/
 │   └── page.tsx              # Photo gallery
+├── nonprofit-info/
+│   └── page.tsx              # Nonprofit and public-record information
 ├── coming-soon/
 │   └── page.tsx              # Legacy link to QCSA information
 └── components/

@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import NonprofitInfoCallout from "./components/NonprofitInfoCallout";
 import QDWBanner from "./components/QDWBanner";
 import Mission from "./components/Mission";
 import Branches from "./components/Branches";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <NonprofitInfoCallout />
         <QDWBanner />
         <Mission />
         <Branches />

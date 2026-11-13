@@ -33,6 +33,12 @@ export default function Navbar() {
         >
           Research
         </a>
+        <a
+          href="/nonprofit-info"
+          className="text-sm font-semibold text-blue-900 hover:text-gray-900 transition-colors"
+        >
+          Nonprofit Info
+        </a>
       </div>
     </nav>
   );
