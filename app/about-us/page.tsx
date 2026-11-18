@@ -27,7 +27,7 @@ interface FacultyMember {
   linkedIn: string;
 }
 
-const boardMembers: TeamMember[] = [
+const uclaMembers: TeamMember[] = [
   {
     id: 1,
     name: "Victor Yu",
@@ -180,56 +180,55 @@ const boardMembers: TeamMember[] = [
   },
 ];
 
-const facultyLeadership: FacultyMember[] = [
-  {
-    id: 1,
-    name: "Professor Mark Gyure",
-    role: "Senior Director",
-    affiliation: "UCLA",
-    branches: ['UCLA'],
-    bio: "In addition to coordinating the day-to-day activities of the CQSE, Gyure's research is focused on the theory and simulation of solid-state quantum information processing devices and architectures, specifically electrostatically-defined semiconductor quantum dots. He and collaborators at UCLA and HRL Laboratories, LLC in Malibu have developed a sophisticated device modeling code that employs the full configuration-interaction (FCI) method to solve the multi-electron Schrodinger equation self consistently with the electrostatic potential generated from realistic device geometries, enabling highly accurate calculations of the energy spectrum of coupled quantum dot systems. He came to UCLA recently from HRL Laboratories where he was the Principal Investigator and Chief Scientist for over 15 years on numerous programs in the quantum information science and technology area.",
-    image: "/mark.png",
-    linkedIn: "https://www.linkedin.com/in/mark-gyure-15b186196/",
-  },
-  {
-    id: 2,
-    name: "Eli Levenson-Falk",
-    role: "Senior Director",
-    affiliation: "University of Southern California",
-    branches: ['UCLA', 'QDC'],
-    bio: "Eli Levenson-Falk is an Associate Professor at USC specializing in quantum device fabrication, materials science, and noise in superconducting quantum systems. His group studies the microscopic origins of decoherence and develops new approaches to building long-lived qubits.",
-    image: "/ELILF.jpeg",
-    linkedIn: "",
-  },
-  {
-    id: 3,
-    name: "Murat Can Sarihan",
-    role: "Senior Director",
-    affiliation: "Google Quantum AI",
-    branches: ['UCLA', 'QDC'],
-    bio: "Murat Can Sarihan is a Research Scientist at Google Quantum AI focusing on superconducting qubit design and quantum error correction. His research contributes to Google's efforts to build large-scale, error-corrected quantum processors.",
-    image: "/Murat_Can_Sarihan.jpeg",
-    linkedIn: "",
-  },
-  {
-    id: 4,
-    name: "Zlatko Minev",
-    role: "Senior Director",
-    affiliation: "Google Quantum AI",
-    branches: ['UCLA', 'QDC'],
-    bio: "Zlatko Minev is a Research Scientist at Google Quantum AI, known for his landmark work on catching and reversing quantum jumps. He also created Qiskit Metal, an open-source quantum hardware design tool. His research spans quantum measurement, qubit design automation, and machine learning for quantum systems.",
-    image: "/ZMinev.jpeg",
-    linkedIn: "",
-  },
+type BoardPerson = { name: string; role: string; email: string; image?: string };
+
+const board: BoardPerson[] = [
+  { name: 'Eli Levenson-Falk', role: 'Vice-President', email: 'elevnso@usc.edu', image: '/ELILF.jpeg' },
+  { name: 'Nicolas Dirnegger', role: 'Member', email: 'nickeyd01@ucla.edu', image: '/NicolasDirnegger.png' },
+  { name: 'Katie Christensen', role: 'Secretary', email: 'kchrist@ucla.edu', image: '/katie-christensen.png' },
+  { name: 'Cody Fan', role: 'CEO', email: 'trifire@ucla.edu', image: '/CodyFan.png' },
+  { name: 'Mark Gyure', role: 'President', email: 'mgyure@ucla.edu', image: '/mark.png' },
+  { name: 'Alexander Jurgens', role: 'Member', email: 'juergens@ucla.edu', image: '/AlexanderJurgens.png' },
+  { name: 'Victor Yu', role: 'CFO', email: 'victoryu2028@ucla.edu', image: '/Victoryu.png' },
 ];
 
-const teamBranches = ['UCLA', 'QDC'];
+const scientificAdvisors: BoardPerson[] = [
+  { name: 'Ahmed Sadman Shanto', role: 'Scientific Advisor', email: 'shanto@usc.edu', image: '/ahmed-sadman-shanto.png' },
+  { name: 'Zlatko Minev', role: 'Scientific Advisor', email: 'zlatko.minev@aya.yale.edu', image: '/ZMinev.jpeg' },
+  { name: 'Murat Can Sarihan', role: 'Scientific Advisor', email: 'mcansarihan@ucla.edu', image: '/Murat_Can_Sarihan.jpeg' },
+  { name: 'Abhishek Chakraborty', role: 'Scientific Advisor', email: 'abhishekchak52@gmail.com', image: '/abhishek-chakraborty.png' },
+];
+
+const teamBranches = ['Board', 'UCLA Club', 'USC Club', 'UCSD Club', 'Caltech Club', 'QDC'];
+
+function BoardSection({ title, people }: { title: string; people: BoardPerson[] }) {
+  return (
+    <section aria-label={title} className="mb-14 last:mb-0">
+      <h3 className="text-2xl font-bold text-[#234285] text-center mb-8">{title}</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {people.map((person) => (
+          <article key={person.email} className="bg-white rounded-2xl overflow-hidden shadow-md">
+            <div className="w-full h-64 bg-[#e2eaf7] flex items-center justify-center relative">
+              {person.image ? <Image src={person.image} alt={person.name} fill className="object-cover" /> :
+                <span aria-hidden="true" className="text-5xl font-bold text-[#234285]/50">{person.name.split(' ').map((part) => part[0]).join('')}</span>}
+            </div>
+            <div className="p-5 text-center">
+              <h4 className="font-bold text-lg text-gray-800 mb-1">{person.name}</h4>
+              <p className="text-[#234285] font-medium text-sm mb-2">{person.role}</p>
+              <a className="text-[#234285] text-sm break-all underline" href={`mailto:${person.email}`}>{person.email}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default function AboutPage() {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | FacultyMember | null>(null);
-  const [selectedBranch, setSelectedBranch] = useState('UCLA');
+  const [selectedBranch, setSelectedBranch] = useState('Board');
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -346,9 +345,15 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {selectedBranch === 'UCLA' ? (
+            {selectedBranch === 'Board' && (
+              <div>
+                <BoardSection title="Board Members" people={board} />
+                <BoardSection title="Scientific Advisors" people={scientificAdvisors} />
+              </div>
+            )}
+            {selectedBranch === 'UCLA Club' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {boardMembers.map((member, index) => (
+                {uclaMembers.map((member, index) => (
                   <motion.div
                     key={member.id}
                     className={`relative group cursor-pointer ${hoveredMember === member.id ? 'z-50' : 'z-0'}`}
@@ -413,91 +418,11 @@ export default function AboutPage() {
                   </motion.div>
                 ))}
               </div>
+            ) : selectedBranch !== 'Board' ? (
+              <p className="text-center text-[#234285]/80">Team information coming soon.</p>
             ) : null}
           </div>
         </section>
-
-        {(selectedBranch === 'UCLA' || selectedBranch === 'QDC') && (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold text-[#234285] text-center mb-16"
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              Senior Leadership
-            </motion.h2>
-            <div className="flex flex-wrap justify-center gap-8">
-              {facultyLeadership.filter((f) => f.branches.includes(selectedBranch)).map((faculty, index) => (
-                <motion.div
-                  key={faculty.id}
-                  className={`relative group cursor-pointer w-full max-w-xs ${hoveredMember === faculty.id + 1000 ? 'z-50' : 'z-0'}`}
-                  onMouseEnter={() => !isMobile && setHoveredMember(faculty.id + 1000)}
-                  onMouseLeave={() => !isMobile && setHoveredMember(null)}
-                  onClick={() => handleMemberClick(faculty)}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                >
-                  <div className="bg-[#F3F8FF] rounded-2xl overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
-                    <div className="w-full h-64 bg-gray-200 flex items-center justify-center overflow-hidden relative">
-                      <Image
-                        src={faculty.image}
-                        alt={faculty.name}
-                        fill
-                        className="object-cover"
-                      />
-                      {isMobile && faculty.linkedIn && (
-                        <button
-                          className="absolute top-2 right-2 w-8 h-8 bg-[#234285] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg hover:bg-blue-700 transition-colors z-10"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (faculty.linkedIn) window.open(faculty.linkedIn, '_blank', 'noopener,noreferrer');
-                          }}
-                          aria-label={`View ${faculty.name}'s LinkedIn profile`}
-                        >
-                          in
-                        </button>
-                      )}
-                    </div>
-                    <div className="p-5 text-center">
-                      <h3 className="font-bold text-lg text-gray-800 mb-1">{faculty.name}</h3>
-                      <p className="text-[#234285] font-medium text-sm">{faculty.role}</p>
-                      {faculty.affiliation && <p className="text-gray-500 text-xs mt-0.5">{faculty.affiliation}</p>}
-                    </div>
-                  </div>
-
-                  {/* Desktop hover popup */}
-                  {!isMobile && hoveredMember === faculty.id + 1000 && (
-                    <div className="absolute z-50 top-0 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 transform -translate-x-2 -translate-y-2 max-h-80 overflow-y-auto">
-                      <div className="flex items-start gap-4">
-                        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
-                          <Image
-                            src={faculty.image}
-                            alt={faculty.name}
-                            fill
-                            className="rounded-full object-cover"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-base text-gray-800 mb-0.5">{faculty.name}</h3>
-                          <p className="text-[#234285] font-medium text-sm mb-0.5">{faculty.role}</p>
-                          {faculty.affiliation && <p className="text-gray-500 text-xs mb-3">{faculty.affiliation}</p>}
-                          <p className="text-gray-600 text-xs leading-relaxed">{faculty.bio}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        )}
 
         {/* Mobile Bio Modal */}
         {isMobile && selectedMember && (
