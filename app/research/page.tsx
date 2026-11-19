@@ -46,9 +46,9 @@ export default function ResearchPage() {
                     <h3 className="mb-2 text-xl font-bold text-[#234285]">{project.title}</h3>
                     <p className="mb-4 text-[#234285]/70">{project.description}</p>
                     <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
-                      <a href={project.paperUrl} target="_blank" rel="noreferrer" className="text-[#234285] hover:text-blue-700">
+                      {project.paperUrl && project.paperLabel && <a href={project.paperUrl} target="_blank" rel="noreferrer" className="text-[#234285] hover:text-blue-700">
                         {project.paperLabel} link ↗
-                      </a>
+                      </a>}
                       <a href={`/research/blog/${project.blogSlug}`} className="text-[#234285] hover:text-blue-700">
                         Project blog →
                       </a>

@@ -3,12 +3,19 @@ export interface ResearchProject {
   description: string;
   image: string;
   imageAlt: string;
-  paperLabel: string;
-  paperUrl: string;
+  paperLabel?: string;
+  paperUrl?: string;
   blogSlug: string;
 }
 
 export const researchProjects: ResearchProject[] = [
+  {
+    title: "QNN Benchmarking",
+    description: "Benchmarking quantum, hybrid, and classical models for energy forecasting under realistic conditions.",
+    image: "/quantum_chip.png",
+    imageAlt: "Quantum chip",
+    blogSlug: "qnn-benchmarking",
+  },
   {
     title: "VQE Benchmarking",
     description: "Benchmarking variational quantum eigensolver approaches.",

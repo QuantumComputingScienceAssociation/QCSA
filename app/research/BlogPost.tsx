@@ -62,6 +62,7 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
             )}
             {post.content?.map((block, index) => {
               if (block.type === "paragraph") return <p key={index}>{renderBlogText(block.text, post)}</p>;
+              if (block.type === "list") return <ul key={index} className="list-disc space-y-2 pl-6">{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderBlogText(item, post)}</li>)}</ul>;
               if (block.type === "caption") {
                 return <p key={index} className="text-sm leading-relaxed text-[#234285]/65">{block.text}</p>;
               }
@@ -118,7 +119,7 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
                   {post.references.map((reference) => (
                     <li key={reference.id} id={`reference-${reference.id}`} className="scroll-mt-8 pl-1">
                       {renderBlogText(reference.text, post)}{" "}
-                      <a href={`#citation-${reference.id}`} aria-label="Back to citation" className="ml-1 text-[#234285] hover:underline">↩</a>
+                      {post.content?.some((block) => (block.type === "paragraph" && block.text.includes(`[[ref:${reference.id}]]`)) || (block.type === "list" && block.items.some((item) => item.includes(`[[ref:${reference.id}]]`)))) && <a href={`#citation-${reference.id}`} aria-label="Back to citation" className="ml-1 text-[#234285] hover:underline">↩</a>}
                     </li>
                   ))}
                 </ol>
