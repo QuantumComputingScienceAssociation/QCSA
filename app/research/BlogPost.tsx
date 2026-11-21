@@ -63,6 +63,14 @@ export default function BlogPost({ post }: { post: ResearchBlog }) {
             {post.content?.map((block, index) => {
               if (block.type === "paragraph") return <p key={index}>{renderBlogText(block.text, post)}</p>;
               if (block.type === "list") return <ul key={index} className="list-disc space-y-2 pl-6">{block.items.map((item, itemIndex) => <li key={itemIndex}>{renderBlogText(item, post)}</li>)}</ul>;
+              if (block.type === "table") return (
+                <div key={index} className="overflow-x-auto">
+                  <table className="w-full min-w-[600px] border-collapse text-left text-sm leading-relaxed">
+                    <thead><tr>{block.headers.map((header, column) => <th key={column} scope="col" className="border-b border-[#234285]/30 px-3 py-3 font-semibold text-[#234285]">{header}</th>)}</tr></thead>
+                    <tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, column) => <td key={column} className="border-b border-[#234285]/15 px-3 py-3 align-top">{renderBlogText(cell, post)}</td>)}</tr>)}</tbody>
+                  </table>
+                </div>
+              );
               if (block.type === "caption") {
                 return <p key={index} className="text-sm leading-relaxed text-[#234285]/65">{block.text}</p>;
               }

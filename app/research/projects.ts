@@ -10,6 +10,13 @@ export interface ResearchProject {
 
 export const researchProjects: ResearchProject[] = [
   {
+    title: "QEC Benchmarking",
+    description: "Comparing quantum error correction architectures across circuit workloads.",
+    image: "/research/qec-benchmarking.png",
+    imageAlt: "Quantum error correction lattice",
+    blogSlug: "qec-benchmarking",
+  },
+  {
     title: "QNN Benchmarking",
     description: "Benchmarking quantum, hybrid, and classical models for energy forecasting under realistic conditions.",
     image: "/quantum_chip.png",
